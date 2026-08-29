@@ -7,13 +7,114 @@ html {
 }
 
 section[id] {
-  scroll-margin-top: 73px;
+  scroll-margin-top: 24px;
 }
 
 body {
-  @apply bg-paper text-ink font-body;
+  @apply bg-paper text-ink font-body font-light;
+  overflow-x: hidden;
 }
 
 ::selection {
   @apply bg-orange text-paper;
+}
+
+/* ── Loader ─────────────────────────────────────────── */
+#loader {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: #0a0a0a;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 32px 40px;
+  transition: opacity 0.6s ease;
+}
+#loader.loader-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+#loader-name {
+  font-size: clamp(1.6rem, 6vw, 4rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+#loader-name.loader-visible {
+  opacity: 1;
+}
+#loader-count {
+  font-size: clamp(1.6rem, 6vw, 4rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #f27a35;
+}
+
+/* ── Sidebar ────────────────────────────────────────── */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 240px;
+  background: #fff;
+  border-right: 1px solid #e5e5e5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px 32px;
+  z-index: 100;
+}
+nav.sidebar-nav a {
+  position: relative;
+  transform-origin: left center;
+  transform: scale(1);
+  transition: transform 0.25s ease, color 0.2s ease;
+}
+nav.sidebar-nav a.active {
+  transform: scale(1.1);
+}
+nav.sidebar-nav a::before {
+  content: '';
+  position: absolute;
+  left: -16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #f27a35;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+nav.sidebar-nav a:hover::before,
+nav.sidebar-nav a.active::before {
+  opacity: 1;
+}
+nav.sidebar-nav a.active {
+  color: #0a0a0a;
+}
+.sidebar-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 90;
+}
+.sidebar-backdrop.open {
+  display: block;
+}
+@media (max-width: 767px) {
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    border-right: none;
+    box-shadow: 4px 0 40px rgba(0, 0, 0, 0.15);
+  }
+  .sidebar.open {
+    transform: translateX(0);
+  }
 }

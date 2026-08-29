@@ -1,0 +1,36 @@
+<div id="loader">
+  <div id="loader-name">HUDUDI INTERIORS</div>
+  <div id="loader-count">0</div>
+</div>
+
+<script>
+  const loader = document.getElementById('loader');
+  const name = document.getElementById('loader-name');
+  const count = document.getElementById('loader-count');
+
+  document.body.style.overflow = 'hidden';
+
+  requestAnimationFrame(() => {
+    name?.classList.add('loader-visible');
+  });
+
+  let n = 0;
+  const interval = setInterval(() => {
+    n += Math.floor(Math.random() * 12) + 3;
+    if (n >= 100) {
+      n = 100;
+      clearInterval(interval);
+    }
+    if (count) count.textContent = String(n);
+
+    if (n === 100) {
+      setTimeout(() => {
+        loader?.classList.add('loader-hidden');
+        document.body.style.overflow = '';
+        setTimeout(() => {
+          if (loader) loader.style.display = 'none';
+        }, 650);
+      }, 250);
+    }
+  }, 210);
+</script>

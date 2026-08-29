@@ -2,51 +2,135 @@
 import Layout from '../layouts/Layout.astro';
 
 const services = [
-  { n: '01', name: 'Fit-Out & Interior Approvals', desc: 'Obtaining approvals from DEWA, Dubai Civil Defence, Dubai Municipality, TRAKHEES, DDA, Dubai Silicon Oasis Authority, CONCORDIA and other developers.' },
-  { n: '02', name: 'Interior Designing & Decoration', desc: 'Custom residential and commercial designs that balance innovation, function and visual appeal.' },
-  { n: '03', name: 'Fit-Out Works', desc: 'End-to-end fit-out for restaurants, offices, salons and pharmacies — creative design met with operational precision.' },
-  { n: '04', name: 'Exhibition Stands', desc: 'Concept, fabrication, installation and delivery of turnkey trade show displays.' },
-  { n: '05', name: 'A/C Supply & Installation', desc: 'Climate control systems including unit supply, ductwork and ongoing maintenance.' },
-  { n: '06', name: 'Electrical & Plumbing Works', desc: 'Professional installation and repair prioritising precision, safety and reliability.' },
-  { n: '07', name: 'Painting Services', desc: 'Finishing for walls, ceilings and furniture — combining aesthetic quality with durability.' },
-  { n: '08', name: 'Masonry Work', desc: 'Structural integrity and visual appeal through quality brick and stone construction.' },
-  { n: '09', name: 'Steel Work', desc: 'Custom fabrication including mezzanine floors and racking systems.' },
-  { n: '10', name: 'Glass & Aluminum Works', desc: 'Precision-crafted partitions and decorative elements for interior spaces.' },
-  { n: '11', name: 'Carpentry Works', desc: 'Custom woodwork — ceilings, partitions, office furniture and doors in premium materials.' },
+  { n: '01', name: 'Fit-Out & Interior Approvals' },
+  { n: '02', name: 'Interior Designing & Decoration' },
+  { n: '03', name: 'Fit-Out Works' },
+  { n: '04', name: 'Exhibition Stands' },
+  { n: '05', name: 'A/C Supply & Installation' },
+  { n: '06', name: 'Electrical & Plumbing Works' },
+  { n: '07', name: 'Painting Services' },
+  { n: '08', name: 'Masonry Work' },
+  { n: '09', name: 'Steel Work' },
+  { n: '10', name: 'Glass & Aluminum Works' },
+  { n: '11', name: 'Carpentry Works' },
+];
+
+const authorities = [
+  { name: 'Dubai Municipality', short: 'DM', logo: '/assets/authorities/dm.svg' },
+  { name: 'Dubai Civil Defence', short: 'DCD', logo: '/assets/authorities/dcd.png' },
+  { name: 'Dubai Development Authority', short: 'DDA', logo: '/assets/authorities/dda.jpg' },
+  { name: 'Trakhees', short: 'TRAKHEES', logo: null },
+  { name: 'Nakheel', short: 'NAKHEEL NOC', logo: '/assets/authorities/nakheel.svg' },
+  { name: 'Emaar', short: 'EMAAR NOC', logo: '/assets/authorities/emaar.svg' },
+  { name: 'Dubai Health Authority', short: 'DHA', logo: null },
+  { name: 'Dubai Electricity & Water Authority', short: 'DEWA', logo: '/assets/authorities/dewa.png' },
+  { name: 'Roads & Transport Authority', short: 'RTA', logo: '/assets/authorities/rta.png' },
+  { name: 'Concordia', short: 'CONCORDIA', logo: null },
+  { name: 'Jebel Ali Free Zone', short: 'JAFZA NOC', logo: '/assets/authorities/jafza.png' },
+  { name: 'Dubai Integrated Economic Zones', short: 'DIEZ', logo: null },
 ];
 
 const projects = [
-  { n: '01', name: 'Project Name', category: 'Retail Fit-Out' },
-  { n: '02', name: 'Project Name', category: 'Office Interior' },
-  { n: '03', name: 'Project Name', category: 'Residential' },
-  { n: '04', name: 'Project Name', category: 'Exhibition Stand' },
-  { n: '05', name: 'Project Name', category: 'Restaurant Fit-Out' },
-  { n: '06', name: 'Project Name', category: 'Commercial' },
+  { name: 'Project Name', category: 'Retail Fit-Out' },
+  { name: 'Project Name', category: 'Office Interior' },
+  { name: 'Project Name', category: 'Residential' },
+  { name: 'Project Name', category: 'Exhibition Stand' },
+  { name: 'Project Name', category: 'Restaurant Fit-Out' },
+  { name: 'Project Name', category: 'Commercial' },
+];
+
+const whyChoose = [
+  { title: '25+ Years of Expertise', desc: 'We bring a wealth of knowledge and expertise to every project, ensuring outstanding results that exceed expectations.' },
+  { title: 'All-in-One Solutions', desc: 'From securing authority approvals to designing and executing intricate interior projects, we offer a tailored, end-to-end solution.' },
+  { title: 'Expert Craftsmanship', desc: 'Our team comprises seasoned experts dedicated to maintaining the highest standards of craftsmanship, precision and quality.' },
+  { title: 'On-Time Delivery', desc: 'We value your time and guarantee timely project completion without compromising on quality, start to finish.' },
 ];
 ---
 
 <Layout>
   <!-- HOME -->
-  <section id="home" class="min-h-[calc(100vh-73px)] flex flex-col justify-center px-6 md:px-10 border-b border-line">
+  <section id="home" class="min-h-screen flex flex-col justify-center px-6 md:px-10 border-b border-line">
     <div class="max-w-7xl mx-auto w-full">
       <p class="text-orange uppercase tracking-widest text-xs md:text-sm mb-6">
-        Fit-Out &amp; Interior Design — Dubai, UAE
+        Interior Design, Approvals and Fitout
       </p>
       <h1 class="font-display font-semibold text-[13vw] md:text-[7vw] leading-[0.95] tracking-tight">
         HUDUDI<br />INTERIORS
       </h1>
-      <p class="mt-8 max-w-xl text-ink/60 text-base md:text-lg leading-relaxed">
+      <p class="mt-8 max-w-xl text-ink/60 text-base leading-relaxed">
         25 years of expertise meets innovation and excellence. Bespoke interior
         design and turnkey fit-out solutions for homes, offices and retail
         spaces across Dubai.
       </p>
       <div class="mt-10 flex flex-wrap gap-4">
-        <a href="#contact" class="bg-ink text-paper px-7 py-3.5 text-xs uppercase tracking-widest hover:bg-orange transition-colors">
+        <a href="#contact" class="rounded-lg bg-ink text-paper px-7 py-3.5 text-xs uppercase tracking-widest hover:bg-orange transition-colors">
           Start a project
         </a>
-        <a href="#services" class="border border-ink px-7 py-3.5 text-xs uppercase tracking-widest hover:border-orange hover:text-orange transition-colors">
+        <a href="#services" class="rounded-lg border border-ink px-7 py-3.5 text-xs uppercase tracking-widest hover:border-orange hover:text-orange transition-colors">
           View services
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="px-6 md:px-10 py-24 md:py-32 border-b border-line">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="font-display font-semibold text-4xl md:text-6xl tracking-tight mb-10">
+        <span class="text-orange">Welcome</span> to HUDUDI Interiors
+      </h2>
+
+      <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center mb-20">
+        <div>
+          <p class="text-ink/70 text-base leading-relaxed mb-8">
+            HUDUDI Interiors is a Dubai-based interior design and fit-out firm
+            bringing over 25 years of combined expertise to residential,
+            commercial and retail spaces across the UAE.
+          </p>
+          <h3 class="font-display text-xl md:text-2xl font-medium mb-3">
+            Comprehensive Interior Design Solutions
+          </h3>
+          <p class="text-ink/70 text-base leading-relaxed">
+            From securing authority approvals to designing and executing
+            intricate interior projects, we offer an all-in-one solution
+            tailored to your specific needs, combining innovation,
+            functionality and premium craftsmanship in every space we build.
+          </p>
+        </div>
+        <div class="aspect-[4/3] rounded-2xl bg-ink flex items-center justify-center overflow-hidden">
+          <span class="font-display text-paper/30 text-sm uppercase tracking-widest">Image of Works</span>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-20">
+        <div class="rounded-2xl bg-ink text-paper p-8 md:p-10">
+          <p class="text-orange uppercase tracking-wide text-2xl md:text-3xl font-display font-semibold mb-4">Our Mission</p>
+          <p class="text-base leading-relaxed">
+            To provide comprehensive and reliable interior services with
+            unmatched quality, ensuring customer satisfaction and fostering
+            long-term relationships.
+          </p>
+        </div>
+        <div class="rounded-2xl border-2 border-orange text-ink p-8 md:p-10">
+          <p class="text-orange uppercase tracking-wide text-2xl md:text-3xl font-display font-semibold mb-4">Our Vision</p>
+          <p class="text-base leading-relaxed">
+            To be a leading name in interior designing services, delivering
+            innovative solutions that redefine the standards of excellence in
+            property enhancement.
+          </p>
+        </div>
+      </div>
+
+      <h3 class="font-display text-2xl md:text-3xl font-semibold mb-10">
+        Why Choose <span class="text-orange">HUDUDI Interiors</span> for Your Next Project?
+      </h3>
+      <div class="grid sm:grid-cols-2 gap-6">
+        {whyChoose.map((w) => (
+          <div class="rounded-2xl border border-line p-6 md:p-8">
+            <h4 class="font-display text-lg font-medium mb-2">{w.title}</h4>
+            <p class="text-base text-ink/60 leading-relaxed">{w.desc}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -54,40 +138,49 @@ const projects = [
   <!-- SERVICES -->
   <section id="services" class="px-6 md:px-10 py-24 md:py-32 border-b border-line">
     <div class="max-w-7xl mx-auto">
-      <div class="flex items-end justify-between mb-16 gap-6 flex-wrap">
-        <h2 class="font-display font-semibold text-4xl md:text-6xl tracking-tight">Services</h2>
-        <p class="text-ink/50 max-w-sm text-sm leading-relaxed">
-          Full-scope interior services — from authority approvals to final finish —
-          managed under one roof.
-        </p>
-      </div>
-      <div>
+      <h2 class="font-display font-semibold text-4xl md:text-6xl tracking-tight mb-16">Services</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
         {services.map((s) => (
-          <div class="group border-t border-line py-6 md:py-8 flex flex-col md:flex-row md:items-center gap-3 md:gap-10 hover:bg-ink hover:text-paper transition-colors px-2 md:px-4 -mx-2 md:-mx-4">
-            <span class="text-orange text-sm md:text-base font-display shrink-0 w-10">{s.n}</span>
-            <h3 class="font-display text-xl md:text-2xl font-medium md:w-80 shrink-0">{s.name}</h3>
-            <p class="text-sm leading-relaxed opacity-70 group-hover:opacity-90">{s.desc}</p>
+          <div class="group rounded-2xl border border-line p-5 md:p-6 flex flex-col gap-4 hover:bg-ink hover:border-ink transition-colors">
+            <span class="text-orange text-sm font-display">{s.n}</span>
+            <h3 class="font-display text-base md:text-lg font-medium leading-snug group-hover:text-paper transition-colors">{s.name}</h3>
           </div>
         ))}
-        <div class="border-t border-line"></div>
       </div>
+    </div>
+  </section>
+
+  <!-- AUTHORITIES -->
+  <section id="authorities" class="px-6 md:px-10 py-24 md:py-32 border-b border-line bg-paper text-ink">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="font-display font-semibold text-4xl md:text-6xl tracking-tight mb-16">Authorities</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        {authorities.map((a) => (
+          <div class="rounded-2xl border border-line aspect-[4/3] p-5 md:p-6 flex items-center justify-center">
+            {a.logo ? (
+              <img src={a.logo} alt={a.name} class="max-h-12 md:max-h-14 max-w-[85%] w-auto h-auto object-contain" />
+            ) : (
+              <span class="font-display text-ink text-sm md:text-base font-semibold uppercase tracking-wide text-center">
+                {a.short}
+              </span>
+            )}
+          </div>
+        ))}
+      </div>
+      <p class="text-base text-ink/40 mt-6">
+        Approvals coordinated with the authorities and developers above; logos shown for identification purposes only.
+      </p>
     </div>
   </section>
 
   <!-- PORTFOLIO -->
   <section id="portfolio" class="px-6 md:px-10 py-24 md:py-32 border-b border-line">
     <div class="max-w-7xl mx-auto">
-      <div class="flex items-end justify-between mb-16 gap-6 flex-wrap">
-        <h2 class="font-display font-semibold text-4xl md:text-6xl tracking-tight">Portfolio</h2>
-        <p class="text-ink/50 max-w-sm text-sm leading-relaxed">
-          A selection of completed fit-outs and interiors across Dubai.
-        </p>
-      </div>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-line">
+      <h2 class="font-display font-semibold text-4xl md:text-6xl tracking-tight mb-16">Portfolio</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         {projects.map((p) => (
-          <div class="group bg-paper aspect-[4/3] p-6 flex flex-col justify-between relative overflow-hidden">
+          <div class="group rounded-2xl bg-paper border border-line aspect-[4/3] p-6 flex flex-col justify-end relative overflow-hidden">
             <div class="absolute inset-0 bg-ink/[0.03] group-hover:bg-orange/10 transition-colors"></div>
-            <span class="relative text-xs text-ink/40 font-display">{p.n}</span>
             <div class="relative">
               <p class="font-display text-lg font-medium">{p.name}</p>
               <p class="text-xs uppercase tracking-widest text-ink/50 mt-1">{p.category}</p>
@@ -95,79 +188,27 @@ const projects = [
           </div>
         ))}
       </div>
-      <p class="text-xs text-ink/40 mt-6">* Project images to be added.</p>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about" class="px-6 md:px-10 py-24 md:py-32 border-b border-line">
-    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16">
-      <div>
-        <h2 class="font-display font-semibold text-4xl md:text-6xl tracking-tight mb-8">About</h2>
-        <p class="text-ink/70 text-base md:text-lg leading-relaxed">
-          HUDUDI Interiors is a Dubai-based interior design and fit-out firm
-          bringing over 25 years of combined expertise to residential,
-          commercial and retail spaces — offering comprehensive, end-to-end
-          project management from authority approvals through final execution.
-        </p>
-      </div>
-      <div class="space-y-10">
-        <div>
-          <p class="text-orange uppercase tracking-widest text-xs mb-2">Mission</p>
-          <p class="text-ink/70 leading-relaxed">
-            To provide comprehensive and reliable interior services with
-            unmatched quality, ensuring customer satisfaction and fostering
-            long-term relationships.
-          </p>
-        </div>
-        <div>
-          <p class="text-orange uppercase tracking-widest text-xs mb-2">Vision</p>
-          <p class="text-ink/70 leading-relaxed">
-            To be a leading name in interior designing services, delivering
-            innovative solutions that redefine the standards of excellence in
-            property enhancement.
-          </p>
-        </div>
-        <div class="grid grid-cols-2 gap-6 pt-4">
-          <div class="border-t border-line pt-4">
-            <p class="font-display text-3xl font-semibold">25+</p>
-            <p class="text-xs uppercase tracking-widest text-ink/50 mt-1">Years of expertise</p>
-          </div>
-          <div class="border-t border-line pt-4">
-            <p class="font-display text-3xl font-semibold">11</p>
-            <p class="text-xs uppercase tracking-widest text-ink/50 mt-1">Services offered</p>
-          </div>
-        </div>
-      </div>
+      <p class="text-base text-ink/40 mt-6">* Project images to be added.</p>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section id="contact" class="px-6 md:px-10 py-24 md:py-32">
-    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16">
-      <div>
-        <h2 class="font-display font-semibold text-4xl md:text-6xl tracking-tight mb-8">
-          Let's build<br />something.
-        </h2>
-        <div class="space-y-6 text-sm">
-          <div>
-            <p class="text-orange uppercase tracking-widest text-xs mb-2">Email</p>
-            <a href="mailto:info@hududi.com" class="text-lg hover:text-orange transition-colors">info@hududi.com</a>
-          </div>
-          <div>
-            <p class="text-orange uppercase tracking-widest text-xs mb-2">Phone</p>
-            <a href="tel:+97142998374" class="block text-lg hover:text-orange transition-colors">+971 4 299 8374</a>
-            <a href="tel:+971505232713" class="block text-lg hover:text-orange transition-colors">+971 50 523 2713</a>
-          </div>
-          <div>
-            <p class="text-orange uppercase tracking-widest text-xs mb-2">Office</p>
-            <p class="text-lg leading-snug">
-              Office No. 1151, 1st Floor, H-Block,<br />Souk Warsan, Dubai, UAE
-            </p>
-          </div>
+  <section id="contact" class="px-6 md:px-10 pt-24 md:pt-32 pb-12 md:pb-16">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="font-display font-semibold text-4xl md:text-6xl tracking-tight mb-12">
+        Let's build<br />something.
+      </h2>
+      <div class="flex flex-col md:flex-row items-stretch gap-16">
+        <div class="rounded-2xl overflow-hidden border border-line aspect-[16/10] md:aspect-auto md:flex-1">
+          <iframe
+            title="HUDUDI Interiors location"
+            class="w-full h-full border-0"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=HUDUDI+INTERIORS+LLC,25.164863,55.3939104&z=16&output=embed"
+          ></iframe>
         </div>
-      </div>
-      <form id="contact-form" class="space-y-6">
+        <form id="contact-form" class="md:flex-1 flex flex-col gap-6">
         <div>
           <label for="name" class="block text-xs uppercase tracking-widest text-ink/50 mb-2">Name</label>
           <input id="name" name="name" type="text" required class="w-full border-b border-line bg-transparent py-3 focus:outline-none focus:border-orange transition-colors" />
@@ -180,10 +221,11 @@ const projects = [
           <label for="message" class="block text-xs uppercase tracking-widest text-ink/50 mb-2">Message</label>
           <textarea id="message" name="message" rows="4" required class="w-full border-b border-line bg-transparent py-3 focus:outline-none focus:border-orange transition-colors resize-none"></textarea>
         </div>
-        <button type="submit" class="bg-ink text-paper px-7 py-3.5 text-xs uppercase tracking-widest hover:bg-orange transition-colors">
+        <button type="submit" class="rounded-lg bg-ink text-paper px-7 py-3.5 text-xs uppercase tracking-widest hover:bg-orange transition-colors">
           Send message
         </button>
-      </form>
+        </form>
+      </div>
     </div>
   </section>
 </Layout>

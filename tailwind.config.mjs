@@ -10,8 +10,8 @@ export default {
         line: '#e5e5e5',
       },
       fontFamily: {
-        display: ['"Space Grotesk"', '"Inter"', 'sans-serif'],
-        body: ['"Inter"', 'sans-serif'],
+        display: ['"Poppins"', '"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
+        body: ['"Poppins"', '"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
       },
     },
   },
