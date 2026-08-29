@@ -63,6 +63,7 @@ const navItems = [
     justify-content: center;
     gap: 5px;
     cursor: pointer;
+    transition: opacity 0.3s ease;
   }
   .hamburger span {
     display: block;
@@ -111,4 +112,18 @@ const navItems = [
     { rootMargin: '-40% 0px -50% 0px' }
   );
   sections.forEach((s) => observer.observe(s));
+
+  const landing = document.getElementById('landing');
+  if (landing) {
+    const landingObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          sidebar?.classList.toggle('nav-hidden', entry.isIntersecting);
+          hamburger?.classList.toggle('nav-hidden', entry.isIntersecting);
+        });
+      },
+      { threshold: 0.5 }
+    );
+    landingObserver.observe(landing);
+  }
 </script>

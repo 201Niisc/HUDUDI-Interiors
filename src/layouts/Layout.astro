@@ -18,6 +18,13 @@ const {
 <!doctype html>
 <html lang="en">
   <head>
+    <script is:inline>
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+      window.scrollTo(0, 0);
+      window.addEventListener('load', () => window.scrollTo(0, 0));
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
@@ -35,6 +42,7 @@ const {
   <body>
     <Loader />
     <Sidebar />
+    <slot name="cover" />
     <div class="flex min-h-screen flex-col md:pl-[240px]">
       <main class="flex-1">
         <slot />
@@ -43,3 +51,83 @@ const {
     </div>
   </body>
 </html>
+
+<script>
+  if ('onwheel' in window) {
+    let current = window.scrollY;
+    let target = window.scrollY;
+    let raf: number | null = null;
+    let lastWheelTime = 0;
+    const easeFactor = 0.085;
+
+    const getMax = () => document.documentElement.scrollHeight - window.innerHeight;
+
+    let homeTop = document.getElementById('home')?.offsetTop ?? 0;
+    const refreshHomeTop = () => {
+      homeTop = document.getElementById('home')?.offsetTop ?? 0;
+    };
+
+    const clampTarget = () => {
+      target = Math.min(Math.max(target, 0), Math.max(getMax(), 0));
+    };
+
+    const loop = () => {
+      current += (target - current) * easeFactor;
+      if (Math.abs(target - current) < 0.5) current = target;
+      window.scrollTo({ top: current, left: 0, behavior: 'instant' });
+      raf = current !== target ? requestAnimationFrame(loop) : null;
+    };
+
+    const ensureLoop = () => {
+      if (raf === null) raf = requestAnimationFrame(loop);
+    };
+
+    window.addEventListener(
+      'wheel',
+      (e) => {
+        if (e.ctrlKey) return;
+        const now = performance.now();
+        if (now - lastWheelTime > 200) {
+          current = window.scrollY;
+          target = window.scrollY;
+        }
+        lastWheelTime = now;
+        e.preventDefault();
+
+        if (e.deltaY > 0 && current < homeTop) {
+          // one scroll carries the whole landing screen straight to home
+          target = homeTop;
+        } else if (e.deltaY < 0 && current <= homeTop) {
+          // and one scroll back up returns straight to the landing screen
+          target = 0;
+        } else {
+          target += e.deltaY;
+        }
+        clampTarget();
+        ensureLoop();
+      },
+      { passive: false }
+    );
+
+    window.addEventListener('resize', () => {
+      refreshHomeTop();
+      clampTarget();
+    });
+
+    document.addEventListener('click', (e) => {
+      const a = (e.target as HTMLElement)?.closest?.('a[href^="#"]') as HTMLAnchorElement | null;
+      if (!a) return;
+      const id = a.getAttribute('href')?.slice(1);
+      if (!id) return;
+      const el = document.getElementById(id);
+      if (!el) return;
+      e.preventDefault();
+      const marginTop = parseFloat(getComputedStyle(el).scrollMarginTop) || 0;
+      current = window.scrollY;
+      target = el.getBoundingClientRect().top + window.scrollY - marginTop;
+      clampTarget();
+      history.pushState(null, '', `#${id}`);
+      ensureLoop();
+    });
+  }
+</script>

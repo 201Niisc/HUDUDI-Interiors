@@ -48,79 +48,88 @@ const whyChoose = [
 ---
 
 <Layout>
-  <!-- HOME -->
-  <section id="home" class="min-h-screen flex flex-col justify-center px-6 md:px-10 border-b border-line">
-    <div class="max-w-7xl mx-auto w-full">
-      <p class="text-orange uppercase tracking-widest text-xs md:text-sm mb-6">
-        Interior Design, Approvals and Fitout
-      </p>
-      <h1 class="font-display font-semibold text-[13vw] md:text-[7vw] leading-[0.95] tracking-tight">
-        HUDUDI<br />INTERIORS
-      </h1>
-      <p class="mt-8 max-w-xl text-ink/60 text-base leading-relaxed">
-        25 years of expertise meets innovation and excellence. Bespoke interior
-        design and turnkey fit-out solutions for homes, offices and retail
-        spaces across Dubai.
-      </p>
-      <div class="mt-10 flex flex-wrap gap-4">
-        <a href="#contact" class="rounded-lg bg-ink text-paper px-7 py-3.5 text-xs uppercase tracking-widest hover:bg-orange transition-colors">
-          Start a project
-        </a>
-        <a href="#services" class="rounded-lg border border-ink px-7 py-3.5 text-xs uppercase tracking-widest hover:border-orange hover:text-orange transition-colors">
-          View services
-        </a>
+  <Fragment slot="cover">
+    <section id="landing" class="landing relative h-screen w-full flex items-center justify-center overflow-hidden">
+      <div class="landing-bg absolute inset-0"></div>
+      <div class="landing-content relative z-10 flex flex-col items-center text-center px-6">
+        <img src="/assets/logo/hududi-icon.png" alt="" class="w-24 md:w-32 h-auto mb-8" />
+        <h1 class="font-display font-semibold text-paper text-[10vw] md:text-[5.5vw] leading-[0.92] tracking-tight">
+          HUDUDI<br />INTERIORS
+        </h1>
+        <p class="mt-6 text-orange uppercase tracking-widest text-xs md:text-sm">
+          Service meets satisfaction
+        </p>
+        <p class="mt-3 text-paper uppercase tracking-widest text-[10px] md:text-xs">
+          Interior Design | Approvals | Fitout
+        </p>
       </div>
-    </div>
-  </section>
+      <a
+        href="#home"
+        aria-label="Scroll to explore"
+        class="landing-scroll absolute bottom-9 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-paper/50 hover:text-orange transition-colors"
+      >
+        <span class="text-[10px] uppercase tracking-widest">Scroll</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 5v14M5 12l7 7 7-7" />
+        </svg>
+      </a>
+    </section>
+    <div id="heroImage" class="hero-image-float landing-bg hidden lg:block" aria-hidden="true"></div>
+  </Fragment>
 
-  <!-- ABOUT -->
-  <section id="about" class="px-6 md:px-10 py-24 md:py-32 border-b border-line">
-    <div class="max-w-7xl mx-auto">
+  <!-- HOME -->
+  <section id="home" class="px-6 md:px-10 py-24 md:py-32 border-b border-line">
+    <div class="max-w-7xl mx-auto reveal relative z-10">
       <h2 class="font-display font-semibold text-4xl md:text-6xl tracking-tight mb-10">
         <span class="text-orange">Welcome</span> to HUDUDI Interiors
       </h2>
 
       <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center mb-20">
         <div>
-          <p class="text-ink/70 text-base leading-relaxed mb-8">
-            HUDUDI Interiors is a Dubai-based interior design and fit-out firm
-            bringing over 25 years of combined expertise to residential,
-            commercial and retail spaces across the UAE.
-          </p>
-          <h3 class="font-display text-xl md:text-2xl font-medium mb-3">
-            Comprehensive Interior Design Solutions
-          </h3>
-          <p class="text-ink/70 text-base leading-relaxed">
-            From securing authority approvals to designing and executing
-            intricate interior projects, we offer an all-in-one solution
-            tailored to your specific needs, combining innovation,
-            functionality and premium craftsmanship in every space we build.
-          </p>
+            <p class="text-ink/70 text-base leading-relaxed mb-8">
+              HUDUDI Interiors is a Dubai-based interior design and fit-out firm
+              bringing over 25 years of combined expertise to residential,
+              commercial and retail spaces across the UAE.
+            </p>
+            <h3 class="font-display text-xl md:text-2xl font-medium mb-3">
+              Comprehensive Interior Design Solutions
+            </h3>
+            <p class="text-ink/70 text-base leading-relaxed">
+              From securing authority approvals to designing and executing
+              intricate interior projects, we offer an all-in-one solution
+              tailored to your specific needs, combining innovation,
+              functionality and premium craftsmanship in every space we build.
+            </p>
+          </div>
+          <div id="heroImageTarget" class="landing-bg aspect-[4/3] rounded-2xl flex items-center justify-center overflow-hidden">
+            <span class="font-display text-paper/30 text-sm uppercase tracking-widest">Image of Works</span>
+          </div>
         </div>
-        <div class="aspect-[4/3] rounded-2xl bg-ink flex items-center justify-center overflow-hidden">
-          <span class="font-display text-paper/30 text-sm uppercase tracking-widest">Image of Works</span>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="rounded-2xl bg-ink text-paper p-8 md:p-10">
+            <p class="text-orange uppercase tracking-wide text-2xl md:text-3xl font-display font-semibold mb-4">Our Mission</p>
+            <p class="text-base leading-relaxed">
+              To provide comprehensive and reliable interior services with
+              unmatched quality, ensuring customer satisfaction and fostering
+              long-term relationships.
+            </p>
+          </div>
+          <div class="rounded-2xl border-2 border-orange text-ink p-8 md:p-10">
+            <p class="text-orange uppercase tracking-wide text-2xl md:text-3xl font-display font-semibold mb-4">Our Vision</p>
+            <p class="text-base leading-relaxed">
+              To be a leading name in interior designing services, delivering
+              innovative solutions that redefine the standards of excellence in
+              property enhancement.
+            </p>
+          </div>
         </div>
       </div>
+  </section>
 
-      <div class="grid md:grid-cols-2 gap-6 mb-20">
-        <div class="rounded-2xl bg-ink text-paper p-8 md:p-10">
-          <p class="text-orange uppercase tracking-wide text-2xl md:text-3xl font-display font-semibold mb-4">Our Mission</p>
-          <p class="text-base leading-relaxed">
-            To provide comprehensive and reliable interior services with
-            unmatched quality, ensuring customer satisfaction and fostering
-            long-term relationships.
-          </p>
-        </div>
-        <div class="rounded-2xl border-2 border-orange text-ink p-8 md:p-10">
-          <p class="text-orange uppercase tracking-wide text-2xl md:text-3xl font-display font-semibold mb-4">Our Vision</p>
-          <p class="text-base leading-relaxed">
-            To be a leading name in interior designing services, delivering
-            innovative solutions that redefine the standards of excellence in
-            property enhancement.
-          </p>
-        </div>
-      </div>
-
+  <!-- ABOUT -->
+  <section id="about" class="px-6 md:px-10 py-24 md:py-32 border-b border-line">
+    <div class="max-w-7xl mx-auto reveal">
       <h3 class="font-display text-2xl md:text-3xl font-semibold mb-10">
         Why Choose <span class="text-orange">HUDUDI Interiors</span> for Your Next Project?
       </h3>
@@ -137,7 +146,7 @@ const whyChoose = [
 
   <!-- SERVICES -->
   <section id="services" class="px-6 md:px-10 py-24 md:py-32 border-b border-line">
-    <div class="max-w-7xl mx-auto">
+    <div class="max-w-7xl mx-auto reveal">
       <h2 class="font-display font-semibold text-4xl md:text-6xl tracking-tight mb-16">Services</h2>
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
         {services.map((s) => (
@@ -152,7 +161,7 @@ const whyChoose = [
 
   <!-- AUTHORITIES -->
   <section id="authorities" class="px-6 md:px-10 py-24 md:py-32 border-b border-line bg-paper text-ink">
-    <div class="max-w-7xl mx-auto">
+    <div class="max-w-7xl mx-auto reveal">
       <h2 class="font-display font-semibold text-4xl md:text-6xl tracking-tight mb-16">Authorities</h2>
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
         {authorities.map((a) => (
@@ -175,7 +184,7 @@ const whyChoose = [
 
   <!-- PORTFOLIO -->
   <section id="portfolio" class="px-6 md:px-10 py-24 md:py-32 border-b border-line">
-    <div class="max-w-7xl mx-auto">
+    <div class="max-w-7xl mx-auto reveal">
       <h2 class="font-display font-semibold text-4xl md:text-6xl tracking-tight mb-16">Portfolio</h2>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         {projects.map((p) => (
@@ -194,7 +203,7 @@ const whyChoose = [
 
   <!-- CONTACT -->
   <section id="contact" class="px-6 md:px-10 pt-24 md:pt-32 pb-12 md:pb-16">
-    <div class="max-w-7xl mx-auto">
+    <div class="max-w-7xl mx-auto reveal">
       <h2 class="font-display font-semibold text-4xl md:text-6xl tracking-tight mb-12">
         Let's build<br />something.
       </h2>
@@ -242,4 +251,69 @@ const whyChoose = [
     const body = `Name: ${name}%0AEmail: ${email}%0A%0A${message}`;
     window.location.href = `mailto:info@hududi.com?subject=${subject}&body=${body}`;
   });
+</script>
+
+<script>
+  const revealEls = document.querySelectorAll<HTMLElement>('.reveal');
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: '0px 0px -10% 0px' }
+  );
+  revealEls.forEach((el) => revealObserver.observe(el));
+</script>
+
+<script>
+  const heroImage = document.getElementById('heroImage');
+  const heroTarget = document.getElementById('heroImageTarget');
+
+  if (heroImage && heroTarget) {
+    const mq = window.matchMedia('(min-width: 1024px)');
+    const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+    let ticking = false;
+
+    // The shrink itself stays fast (done within one viewport height, same
+    // pace as the landing -> home scroll snap) so the box is already small
+    // before the hero text is on screen. The target lives further down the
+    // page now, so once shrunk it just keeps tracking the target's live
+    // position and glides into place like a normal element as you scroll on.
+    const render = () => {
+      ticking = false;
+      if (!mq.matches) return;
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const t = heroTarget.getBoundingClientRect();
+      const progress = Math.min(Math.max(window.scrollY / vh, 0), 1);
+
+      heroImage.style.top = `${lerp(0, t.top, progress)}px`;
+      heroImage.style.left = `${lerp(0, t.left, progress)}px`;
+      heroImage.style.width = `${lerp(vw, t.width, progress)}px`;
+      heroImage.style.height = `${lerp(vh, t.height, progress)}px`;
+      heroImage.style.borderRadius = `${lerp(0, 16, progress)}px`;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(render);
+      }
+    };
+
+    const syncVisibility = () => {
+      heroImage.style.display = mq.matches ? 'block' : 'none';
+      render();
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    window.addEventListener('load', render);
+    mq.addEventListener('change', syncVisibility);
+    syncVisibility();
+  }
 </script>
