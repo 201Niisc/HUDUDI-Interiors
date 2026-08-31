@@ -7,12 +7,42 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
 }
 
 const {
   title = 'Fit-Out & Interior Design in Dubai',
   description = '25 years of expertise meets innovation and excellence. Fit-out, interior design and technical solutions for homes, offices and retail spaces across Dubai.',
+  image = '/assets/logo/hududi-interiors-logo.png',
 } = Astro.props;
+
+const pageTitle = `${title} | HUDUDI Interiors`;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL(image, Astro.site);
+
+const businessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HomeAndConstructionBusiness',
+  name: 'HUDUDI Interiors L.L.C.',
+  image: ogImageURL.toString(),
+  url: Astro.site?.toString(),
+  telephone: '+971505232713',
+  email: 'info@hududi.com',
+  description,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Office No. 1151, 1st Floor, H-Block, Souk Warsan',
+    addressLocality: 'Dubai',
+    addressCountry: 'AE',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 25.164863,
+    longitude: 55.3939104,
+  },
+  areaServed: 'Dubai, United Arab Emirates',
+  sameAs: ['https://instagram.com/hududi.services'],
+};
 ---
 
 <!doctype html>
@@ -30,14 +60,33 @@ const {
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="256x256" href="/favicon-256.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#f27a35" />
     <meta name="description" content={description} />
-    <title>{title} | HUDUDI Interiors</title>
+    <link rel="canonical" href={canonicalURL} />
+    <title>{pageTitle}</title>
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="HUDUDI Interiors" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:locale" content="en_AE" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+    <script type="application/ld+json" set:html={JSON.stringify(businessSchema)} />
   </head>
   <body>
     <Loader />
