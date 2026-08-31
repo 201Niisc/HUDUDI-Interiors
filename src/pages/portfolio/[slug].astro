@@ -7,11 +7,13 @@ export function getStaticPaths() {
 }
 
 const { project } = Astro.props;
+const images = project.images ?? [];
+const heroTransitionName = `view-transition-name: project-image-${project.slug}`;
 ---
 
 <Layout
   title={project.name}
-  description={project.description ?? `${project.name} — ${project.category} project by HUDUDI Interiors.`}
+  description={`${project.name} — ${project.category} project by HUDUDI Interiors in ${project.location}.`}
 >
   <section class="px-6 md:px-10 py-16 md:py-24">
     <div class="max-w-7xl mx-auto reveal">
@@ -33,37 +35,71 @@ const { project } = Astro.props;
           </div>
           <div class="space-y-5 text-sm">
             <div>
-              <p class="text-ink/40 uppercase tracking-widest text-[10px] mb-1">Client</p>
-              <p>{project.client ?? '—'}</p>
-            </div>
-            <div>
               <p class="text-ink/40 uppercase tracking-widest text-[10px] mb-1">Location</p>
               <p>{project.location ?? '—'}</p>
             </div>
             <div>
-              <p class="text-ink/40 uppercase tracking-widest text-[10px] mb-1">Size</p>
-              <p>{project.size ?? '—'}</p>
+              <p class="text-ink/40 uppercase tracking-widest text-[10px] mb-1">Authorities</p>
+              <p>{(project.authorities ?? []).join(', ') || '—'}</p>
+            </div>
+            <div>
+              <p class="text-ink/40 uppercase tracking-widest text-[10px] mb-1">Scope of Work</p>
+              <p>{(project.scopeOfWork ?? []).join(', ') || '—'}</p>
             </div>
             <div>
               <p class="text-ink/40 uppercase tracking-widest text-[10px] mb-1">Status</p>
               <p>{project.status ?? '—'}</p>
             </div>
             <div>
+              <p class="text-ink/40 uppercase tracking-widest text-[10px] mb-1">Size</p>
+              <p>{project.size ?? '—'}</p>
+            </div>
+            <div>
               <p class="text-ink/40 uppercase tracking-widest text-[10px] mb-1">Year</p>
               <p>{project.year ?? '—'}</p>
+            </div>
+            <div>
+              <p class="text-ink/40 uppercase tracking-widest text-[10px] mb-1">Tags</p>
+              <div class="flex flex-wrap gap-2 mt-1">
+                {(project.tags ?? []).map((tag) => (
+                  <span class="rounded-full border border-line px-3 py-1 text-xs text-ink/60">{tag}</span>
+                ))}
+              </div>
             </div>
           </div>
         </div>
 
         <div>
-          <div
-            class="aspect-[16/10] rounded-2xl overflow-hidden landing-bg"
-            style={`view-transition-name: project-image-${project.slug}`}
-          >
-          </div>
-          <p class="mt-10 text-ink/70 leading-relaxed max-w-2xl">
-            {project.description ?? 'Project description to be added once details are confirmed.'}
-          </p>
+          {images.length > 0 ? (
+            <img
+              src={images[0]}
+              alt={project.name}
+              class="aspect-[16/10] w-full rounded-2xl overflow-hidden object-cover"
+              style={heroTransitionName}
+            />
+          ) : (
+            <div class="aspect-[16/10] rounded-2xl overflow-hidden landing-bg" style={heroTransitionName}></div>
+          )}
+
+          {images.length > 1 ? (
+            <div class="grid grid-cols-3 gap-3 md:gap-4 mt-4 md:mt-6">
+              {images.slice(1).map((src, i) => (
+                <img
+                  src={src}
+                  alt={`${project.name} — image ${i + 2}`}
+                  class="aspect-square rounded-2xl overflow-hidden object-cover"
+                  loading="lazy"
+                />
+              ))}
+            </div>
+          ) : (
+            <div class="grid grid-cols-3 gap-3 md:gap-4 mt-4 md:mt-6">
+              <div class="aspect-square rounded-2xl overflow-hidden landing-bg"></div>
+              <div class="aspect-square rounded-2xl overflow-hidden landing-bg"></div>
+              <div class="aspect-square rounded-2xl overflow-hidden landing-bg"></div>
+            </div>
+          )}
+          <p class="mt-8 text-base text-ink/40">* Project images to be added.</p>
         </div>
       </div>
     </div>
