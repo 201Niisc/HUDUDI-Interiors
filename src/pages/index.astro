@@ -179,22 +179,34 @@ const whyChoose = [
     <div class="max-w-7xl mx-auto reveal">
       <h2 class="font-display font-semibold text-4xl md:text-6xl tracking-tight mb-16">Portfolio</h2>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {projects.map((p) => (
-          <a
-            href={`/portfolio/${p.slug}`}
-            class="group rounded-2xl bg-paper border border-line aspect-[4/3] p-6 flex flex-col justify-end relative overflow-hidden"
-            style={`view-transition-name: project-image-${p.slug}`}
-          >
-            <div class="absolute inset-0 bg-ink/[0.03] group-hover:bg-orange/10 transition-colors"></div>
-            <span class="absolute top-6 right-6 text-[10px] uppercase tracking-widest text-orange opacity-0 group-hover:opacity-100 transition-opacity">
-              View project →
-            </span>
-            <div class="relative">
-              <p class="font-display text-lg font-medium">{p.name}</p>
-              <p class="text-xs uppercase tracking-widest text-ink/50 mt-1">{p.category}</p>
-            </div>
-          </a>
-        ))}
+        {projects.map((p) => {
+          const hasImage = p.images && p.images.length > 0;
+          return (
+            <a
+              href={`/portfolio/${p.slug}`}
+              class={`group rounded-2xl border border-line aspect-[4/3] p-6 flex flex-col justify-end relative overflow-hidden ${hasImage ? '' : 'bg-paper'}`}
+              style={!hasImage ? `view-transition-name: project-image-${p.slug}` : undefined}
+            >
+              {hasImage && (
+                <img
+                  src={p.images[0]}
+                  alt={p.name}
+                  class="absolute inset-0 w-full h-full object-cover"
+                  style={`view-transition-name: project-image-${p.slug}`}
+                  loading="lazy"
+                />
+              )}
+              <div class={`absolute inset-0 transition-colors ${hasImage ? 'bg-gradient-to-t from-ink/80 via-ink/10 to-transparent' : 'bg-ink/[0.03] group-hover:bg-orange/10'}`}></div>
+              <span class={`absolute top-6 right-6 text-[10px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity ${hasImage ? 'text-paper' : 'text-orange'}`}>
+                View project →
+              </span>
+              <div class="relative">
+                <p class={`font-display text-lg font-medium ${hasImage ? 'text-paper' : ''}`}>{p.name}</p>
+                <p class={`text-xs uppercase tracking-widest mt-1 ${hasImage ? 'text-paper/70' : 'text-ink/50'}`}>{p.category}</p>
+              </div>
+            </a>
+          );
+        })}
       </div>
       <p class="text-base text-ink/40 mt-6">* Project images to be added.</p>
     </div>

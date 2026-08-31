@@ -22,6 +22,26 @@ body {
   @apply bg-orange text-paper;
 }
 
+/* ── Horizontal image scroller ─────────────────────── */
+.hscroll {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+}
+.hscroll::-webkit-scrollbar {
+  display: none;
+}
+.hscroll.dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  user-select: none;
+}
+.hscroll img {
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
 /* ── Landing cover ──────────────────────────────────── */
 .landing-bg {
   background:

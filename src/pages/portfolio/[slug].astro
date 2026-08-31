@@ -15,7 +15,7 @@ const heroTransitionName = `view-transition-name: project-image-${project.slug}`
   title={project.name}
   description={`${project.name} — ${project.category} project by HUDUDI Interiors in ${project.location}.`}
 >
-  <section class="px-6 md:px-10 py-16 md:py-24">
+  <section class="px-6 md:px-10 pt-16 md:pt-24">
     <div class="max-w-7xl mx-auto reveal">
       <a
         href="/#portfolio"
@@ -69,7 +69,7 @@ const heroTransitionName = `view-transition-name: project-image-${project.slug}`
           </div>
         </div>
 
-        <div>
+        <div class="min-w-0">
           {images.length > 0 ? (
             <img
               src={images[0]}
@@ -80,28 +80,56 @@ const heroTransitionName = `view-transition-name: project-image-${project.slug}`
           ) : (
             <div class="aspect-[16/10] rounded-2xl overflow-hidden landing-bg" style={heroTransitionName}></div>
           )}
-
-          {images.length > 1 ? (
-            <div class="grid grid-cols-3 gap-3 md:gap-4 mt-4 md:mt-6">
-              {images.slice(1).map((src, i) => (
-                <img
-                  src={src}
-                  alt={`${project.name} — image ${i + 2}`}
-                  class="aspect-square rounded-2xl overflow-hidden object-cover"
-                  loading="lazy"
-                />
-              ))}
-            </div>
-          ) : (
-            <div class="grid grid-cols-3 gap-3 md:gap-4 mt-4 md:mt-6">
-              <div class="aspect-square rounded-2xl overflow-hidden landing-bg"></div>
-              <div class="aspect-square rounded-2xl overflow-hidden landing-bg"></div>
-              <div class="aspect-square rounded-2xl overflow-hidden landing-bg"></div>
-            </div>
-          )}
-          <p class="mt-8 text-base text-ink/40">* Project images to be added.</p>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- Full-bleed from the right edge of the sidebar to the right edge of the viewport -->
+  {images.length > 1 ? (
+    <div class="hscroll flex gap-3 md:gap-4 overflow-x-auto mt-8 md:mt-10 pb-16 md:pb-24">
+      {images.slice(1).map((src, i) => (
+        <img
+          src={src}
+          alt={`${project.name} — image ${i + 2}`}
+          class="h-[432px] sm:h-[540px] w-auto shrink-0 rounded-2xl first:ml-6 md:first:ml-10 last:mr-6 md:last:mr-10"
+          loading="lazy"
+          draggable="false"
+        />
+      ))}
+    </div>
+  ) : (
+    <div class="hscroll flex gap-3 md:gap-4 overflow-x-auto mt-8 md:mt-10 pb-16 md:pb-24">
+      <div class="h-[432px] sm:h-[540px] w-[432px] sm:w-[540px] shrink-0 rounded-2xl overflow-hidden landing-bg first:ml-6 md:first:ml-10"></div>
+      <div class="h-[432px] sm:h-[540px] w-[432px] sm:w-[540px] shrink-0 rounded-2xl overflow-hidden landing-bg"></div>
+      <div class="h-[432px] sm:h-[540px] w-[432px] sm:w-[540px] shrink-0 rounded-2xl overflow-hidden landing-bg last:mr-6 md:last:mr-10"></div>
+    </div>
+  )}
+  {images.length === 0 && (
+    <p class="px-6 md:px-10 pb-16 md:pb-24 text-base text-ink/40">* Project images to be added.</p>
+  )}
 </Layout>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.hscroll').forEach((el) => {
+    let isDown = false;
+    let startX = 0;
+    let scrollStart = 0;
+
+    el.addEventListener('mousedown', (e) => {
+      isDown = true;
+      startX = e.pageX;
+      scrollStart = el.scrollLeft;
+      el.classList.add('dragging');
+    });
+    window.addEventListener('mouseup', () => {
+      isDown = false;
+      el.classList.remove('dragging');
+    });
+    window.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      el.scrollLeft = scrollStart - (e.pageX - startX);
+    });
+  });
+</script>
