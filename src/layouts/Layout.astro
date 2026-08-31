@@ -1,7 +1,6 @@
 ---
 import Sidebar from '../components/Sidebar.astro';
 import Footer from '../components/Footer.astro';
-import Loader from '../components/Loader.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -16,6 +15,7 @@ const {
   image = '/assets/logo/hududi-interiors-logo.png',
 } = Astro.props;
 
+const hasCover = Astro.slots.has('cover');
 const pageTitle = `${title} | HUDUDI Interiors`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImageURL = new URL(image, Astro.site);
@@ -52,8 +52,10 @@ const businessSchema = {
       if ('scrollRestoration' in history) {
         history.scrollRestoration = 'manual';
       }
-      window.scrollTo(0, 0);
-      window.addEventListener('load', () => window.scrollTo(0, 0));
+      if (!location.hash) {
+        window.scrollTo(0, 0);
+        window.addEventListener('load', () => window.scrollTo(0, 0));
+      }
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -61,6 +63,7 @@ const businessSchema = {
     <link rel="icon" type="image/png" sizes="256x256" href="/favicon-256.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="theme-color" content="#f27a35" />
+    <meta name="view-transition" content="same-origin" />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
     <title>{pageTitle}</title>
@@ -89,8 +92,7 @@ const businessSchema = {
     <script type="application/ld+json" set:html={JSON.stringify(businessSchema)} />
   </head>
   <body>
-    <Loader />
-    <Sidebar />
+    <Sidebar startHidden={hasCover} />
     <slot name="cover" />
     <div class="flex min-h-screen flex-col md:pl-[240px]">
       <main class="flex-1">
@@ -100,6 +102,22 @@ const businessSchema = {
     </div>
   </body>
 </html>
+
+<script>
+  const revealEls = document.querySelectorAll<HTMLElement>('.reveal');
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: '0px 0px -10% 0px' }
+  );
+  revealEls.forEach((el) => revealObserver.observe(el));
+</script>
 
 <script>
   if ('onwheel' in window) {

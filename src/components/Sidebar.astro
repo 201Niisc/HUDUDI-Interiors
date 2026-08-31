@@ -1,4 +1,10 @@
 ---
+interface Props {
+  startHidden?: boolean;
+}
+
+const { startHidden = false } = Astro.props;
+
 const navItems = [
   { href: '#home', label: 'Home' },
   { href: '#about', label: 'About' },
@@ -11,11 +17,11 @@ const navItems = [
 
 <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
 
-<button class="hamburger" id="hamburger" aria-label="Toggle menu">
+<button class="hamburger" id="hamburger" aria-label="Toggle menu" class:list={{ 'nav-hidden': startHidden }}>
   <span></span><span></span><span></span>
 </button>
 
-<aside class="sidebar" id="sidebar">
+<aside class="sidebar" id="sidebar" class:list={{ 'nav-hidden': startHidden }}>
   <div>
     <a href="#home" class="block">
       <img src="/assets/logo/hududi-interiors-logo.png" alt="HUDUDI Interiors" class="w-full h-auto" />

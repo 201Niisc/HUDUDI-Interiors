@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { projects } from '../data/projects.js';
 
 const services = [
   { n: '01', name: 'Fit-Out & Interior Approvals' },
@@ -28,15 +29,6 @@ const authorities = [
   { name: 'Concordia', short: 'CONCORDIA', logo: null },
   { name: 'Jebel Ali Free Zone', short: 'JAFZA NOC', logo: '/assets/authorities/jafza.png' },
   { name: 'Dubai Integrated Economic Zones', short: 'DIEZ', logo: null },
-];
-
-const projects = [
-  { name: 'Project Name', category: 'Retail Fit-Out' },
-  { name: 'Project Name', category: 'Office Interior' },
-  { name: 'Project Name', category: 'Residential' },
-  { name: 'Project Name', category: 'Exhibition Stand' },
-  { name: 'Project Name', category: 'Restaurant Fit-Out' },
-  { name: 'Project Name', category: 'Commercial' },
 ];
 
 const whyChoose = [
@@ -188,13 +180,20 @@ const whyChoose = [
       <h2 class="font-display font-semibold text-4xl md:text-6xl tracking-tight mb-16">Portfolio</h2>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         {projects.map((p) => (
-          <div class="group rounded-2xl bg-paper border border-line aspect-[4/3] p-6 flex flex-col justify-end relative overflow-hidden">
+          <a
+            href={`/portfolio/${p.slug}`}
+            class="group rounded-2xl bg-paper border border-line aspect-[4/3] p-6 flex flex-col justify-end relative overflow-hidden"
+            style={`view-transition-name: project-image-${p.slug}`}
+          >
             <div class="absolute inset-0 bg-ink/[0.03] group-hover:bg-orange/10 transition-colors"></div>
+            <span class="absolute top-6 right-6 text-[10px] uppercase tracking-widest text-orange opacity-0 group-hover:opacity-100 transition-opacity">
+              View project →
+            </span>
             <div class="relative">
               <p class="font-display text-lg font-medium">{p.name}</p>
               <p class="text-xs uppercase tracking-widest text-ink/50 mt-1">{p.category}</p>
             </div>
-          </div>
+          </a>
         ))}
       </div>
       <p class="text-base text-ink/40 mt-6">* Project images to be added.</p>
@@ -251,22 +250,6 @@ const whyChoose = [
     const body = `Name: ${name}%0AEmail: ${email}%0A%0A${message}`;
     window.location.href = `mailto:info@hududi.com?subject=${subject}&body=${body}`;
   });
-</script>
-
-<script>
-  const revealEls = document.querySelectorAll<HTMLElement>('.reveal');
-  const revealObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.15, rootMargin: '0px 0px -10% 0px' }
-  );
-  revealEls.forEach((el) => revealObserver.observe(el));
 </script>
 
 <script>

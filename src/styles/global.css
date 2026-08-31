@@ -31,11 +31,14 @@ body {
 .landing-content {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 0.9s ease, transform 0.9s ease;
+  animation: landing-in 0.9s ease forwards;
+  animation-delay: 0.15s;
 }
-body.loaded .landing-content {
-  opacity: 1;
-  transform: translateY(0);
+@keyframes landing-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .hero-image-float {
   position: fixed;
@@ -58,7 +61,7 @@ body.loaded .landing-content {
   .landing-content {
     opacity: 1;
     transform: none;
-    transition: none;
+    animation: none;
   }
   .landing-scroll {
     animation: none;
@@ -81,40 +84,6 @@ body.loaded .landing-content {
     transform: none;
     transition: none;
   }
-}
-
-/* ── Loader ─────────────────────────────────────────── */
-#loader {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  background: #0a0a0a;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  padding: 32px 40px;
-  transition: opacity 0.6s ease;
-}
-#loader.loader-hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-#loader-name {
-  font-size: clamp(1.6rem, 6vw, 4rem);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  color: #fff;
-  opacity: 0;
-  transition: opacity 0.6s ease;
-}
-#loader-name.loader-visible {
-  opacity: 1;
-}
-#loader-count {
-  font-size: clamp(1.6rem, 6vw, 4rem);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  color: #f27a35;
 }
 
 /* ── Sidebar ────────────────────────────────────────── */
