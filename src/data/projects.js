@@ -31,7 +31,11 @@ export const projects = [
     slug: 'rayhaan-perfumes',
     name: 'Rayhaan Perfumes',
     category: 'Retail Fit-Out',
-    ...placeholderFields,
+    location: 'Al Qusais, Dubai, U.A.E',
+    authorities: ['Dubai Municipality', 'Dubai Civil Defence'],
+    scopeOfWork: ['Approval Drawings', 'Warehouse and Office Fitout Works', 'Project Management'],
+    status: 'Completed',
+    year: '2026',
     images: [
       '/assets/projects/rayhaan-perfumes/hero.jpg',
       '/assets/projects/rayhaan-perfumes/01.jpg',
