@@ -5,6 +5,9 @@ interface Props {
 
 const { startHidden = false } = Astro.props;
 
+const isHome = Astro.url.pathname === '/';
+const sectionHref = (hash: string) => (isHome ? hash : `/${hash}`);
+
 const navItems = [
   { href: '#home', label: 'Home' },
   { href: '#about', label: 'About' },
@@ -23,7 +26,7 @@ const navItems = [
 
 <aside class="sidebar" id="sidebar" class:list={{ 'nav-hidden': startHidden }}>
   <div>
-    <a href="#home" class="block">
+    <a href="/" id="logoLink" class="block">
       <img src="/assets/logo/hududi-interiors-logo.png" alt="HUDUDI Interiors" class="w-full h-auto" />
     </a>
     <div class="w-20 h-0.5 bg-orange rounded-full mt-3"></div>
@@ -32,7 +35,7 @@ const navItems = [
   <nav class="sidebar-nav flex flex-col gap-2">
     {navItems.map((item) => (
       <a
-        href={item.href}
+        href={sectionHref(item.href)}
         data-section={item.href.slice(1)}
         class="nav-link text-sm font-medium uppercase tracking-widest text-ink/50 hover:text-ink transition-colors py-1"
       >
@@ -42,7 +45,7 @@ const navItems = [
   </nav>
 
   <a
-    href="#contact"
+    href={sectionHref('#contact')}
     aria-label="Jump to contact"
     class="w-9 h-9 rounded-lg border border-line flex items-center justify-center text-ink/50 hover:text-orange hover:border-orange transition-colors"
   >

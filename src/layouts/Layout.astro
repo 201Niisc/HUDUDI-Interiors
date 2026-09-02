@@ -196,5 +196,17 @@ const businessSchema = {
       history.pushState(null, '', `#${id}`);
       ensureLoop();
     });
+
+    // Logo always points to "/" so it works from any page; when already on
+    // the homepage, ease back up to the very top instead of reloading.
+    document.getElementById('logoLink')?.addEventListener('click', (e) => {
+      if (location.pathname !== '/') return;
+      e.preventDefault();
+      current = window.scrollY;
+      target = 0;
+      clampTarget();
+      history.pushState(null, '', '/');
+      ensureLoop();
+    });
   }
 </script>
