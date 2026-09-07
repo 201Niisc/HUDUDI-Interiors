@@ -18,24 +18,24 @@ const services = [
 
 const authorities = [
   { name: 'Dubai Municipality', short: 'DM', logo: '/assets/authorities/dm.svg' },
-  { name: 'Dubai Civil Defence', short: 'DCD', logo: '/assets/authorities/dcd.png' },
+  { name: 'Dubai Civil Defense', short: 'DCD', logo: '/assets/authorities/dcd.png' },
   { name: 'Dubai Development Authority', short: 'DDA', logo: '/assets/authorities/dda.jpg' },
-  { name: 'Trakhees', short: 'TRAKHEES', logo: null },
+  { name: 'Trakhees', short: 'TRAKHEES', logo: '/assets/authorities/trakhees.avif' },
   { name: 'Nakheel', short: 'NAKHEEL NOC', logo: '/assets/authorities/nakheel.svg' },
   { name: 'Emaar', short: 'EMAAR NOC', logo: '/assets/authorities/emaar.svg' },
-  { name: 'Dubai Health Authority', short: 'DHA', logo: null },
+  { name: 'Dubai South', short: 'DUBAI SOUTH', logo: '/assets/authorities/dubai-south.svg' },
   { name: 'Dubai Electricity & Water Authority', short: 'DEWA', logo: '/assets/authorities/dewa.png' },
-  { name: 'Roads & Transport Authority', short: 'RTA', logo: '/assets/authorities/rta.png' },
-  { name: 'Concordia', short: 'CONCORDIA', logo: null },
+  { name: 'Dubai Silicon Oasis', short: 'DSO', logo: '/assets/authorities/dso.webp' },
+  { name: 'Concordia', short: 'CONCORDIA', logo: '/assets/authorities/concordia.png' },
   { name: 'Jebel Ali Free Zone', short: 'JAFZA NOC', logo: '/assets/authorities/jafza.png' },
-  { name: 'Dubai Integrated Economic Zones', short: 'DIEZ', logo: null },
+  { name: 'Dubai Holding', short: 'DUBAI HOLDING', logo: '/assets/authorities/dubai-holding.avif' },
 ];
 
 const whyChoose = [
-  { title: '25+ Years of Expertise', desc: 'We bring a wealth of knowledge and expertise to every project, ensuring outstanding results that exceed expectations.' },
-  { title: 'All-in-One Solutions', desc: 'From securing authority approvals to designing and executing intricate interior projects, we offer a tailored, end-to-end solution.' },
-  { title: 'Expert Craftsmanship', desc: 'Our team comprises seasoned experts dedicated to maintaining the highest standards of craftsmanship, precision and quality.' },
-  { title: 'On-Time Delivery', desc: 'We value your time and guarantee timely project completion without compromising on quality, start to finish.' },
+  { title: 'All-in-One Solutions', desc: 'From design and fit-out approvals to executing the works, we offer a tailored, end-to-end solution for every stage of your project.', image: '/assets/projects/amber-grounds-cafe/hero.jpg' },
+  { title: 'In-House Design Team', desc: 'Our dedicated in-house designers work with you from concept to completion, ensuring a cohesive vision and full control over quality at every stage.', image: '/assets/projects/murjan-1/hero.jpeg' },
+  { title: 'On-Time Delivery', desc: 'We value your time and guarantee timely project completion without compromising on quality, start to finish.', image: '/assets/projects/rayhaan-perfumes/hero.jpg' },
+  { title: 'Expert Craftsmanship', desc: 'Our team comprises seasoned experts dedicated to maintaining the highest standards of craftsmanship, precision and quality.', image: '/assets/stock-photos/design-planning.jpg' },
 ];
 ---
 
@@ -125,11 +125,15 @@ const whyChoose = [
       <h3 class="font-display text-2xl md:text-3xl font-semibold mb-10">
         Why Choose <span class="text-orange">HUDUDI Interiors</span> for Your Next Project?
       </h3>
-      <div class="grid sm:grid-cols-2 gap-6">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {whyChoose.map((w) => (
-          <div class="rounded-2xl border border-line p-6 md:p-8">
-            <h4 class="font-display text-lg font-medium mb-2">{w.title}</h4>
-            <p class="text-base text-ink/60 leading-relaxed">{w.desc}</p>
+          <div>
+            <div class="relative aspect-[3/4] rounded-2xl overflow-hidden">
+              <img src={w.image} alt={w.title} class="absolute inset-0 w-full h-full object-cover" />
+              <div class="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent"></div>
+              <p class="absolute bottom-4 left-4 right-4 text-paper font-display text-lg font-medium leading-snug">{w.title}</p>
+            </div>
+            <p class="mt-4 text-base text-ink/60 leading-relaxed">{w.desc}</p>
           </div>
         ))}
       </div>
@@ -225,7 +229,7 @@ const whyChoose = [
             class="w-full h-full border-0"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps?q=HUDUDI+INTERIORS+LLC,25.164863,55.3939104&z=16&output=embed"
+            src="https://www.google.com/maps?q=25.164863,55.3939104&z=16&output=embed"
           ></iframe>
         </div>
         <form id="contact-form" class="md:flex-1 flex flex-col gap-6">
