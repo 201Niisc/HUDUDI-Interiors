@@ -25,17 +25,17 @@ const authorities = [
   { name: 'Emaar', short: 'EMAAR NOC', logo: '/assets/authorities/emaar.svg' },
   { name: 'Dubai South', short: 'DUBAI SOUTH', logo: '/assets/authorities/dubai-south.svg' },
   { name: 'Dubai Electricity & Water Authority', short: 'DEWA', logo: '/assets/authorities/dewa.png' },
-  { name: 'Dubai Silicon Oasis', short: 'DSO', logo: '/assets/authorities/dso.webp' },
+  { name: 'Dubai Silicon Oasis', short: 'DSO', logo: '/assets/authorities/dso.png' },
   { name: 'Concordia', short: 'CONCORDIA', logo: '/assets/authorities/concordia.png' },
   { name: 'Jebel Ali Free Zone', short: 'JAFZA NOC', logo: '/assets/authorities/jafza.png' },
   { name: 'Dubai Holding', short: 'DUBAI HOLDING', logo: '/assets/authorities/dubai-holding.avif' },
 ];
 
 const whyChoose = [
-  { title: 'All-in-One Solutions', desc: 'From design and fit-out approvals to executing the works, we offer a tailored, end-to-end solution for every stage of your project.', image: '/assets/projects/amber-grounds-cafe/hero.jpg' },
-  { title: 'In-House Design Team', desc: 'Our dedicated in-house designers work with you from concept to completion, ensuring a cohesive vision and full control over quality at every stage.', image: '/assets/projects/murjan-1/hero.jpeg' },
-  { title: 'On-Time Delivery', desc: 'We value your time and guarantee timely project completion without compromising on quality, start to finish.', image: '/assets/projects/rayhaan-perfumes/hero.jpg' },
-  { title: 'Expert Craftsmanship', desc: 'Our team comprises seasoned experts dedicated to maintaining the highest standards of craftsmanship, precision and quality.', image: '/assets/stock-photos/design-planning.jpg' },
+  { title: 'All-in-One Solutions', desc: 'From design and fit-out approvals to executing the works, we offer a tailored, end-to-end solution for every stage of your project.', image: '/assets/stock-photos/1.jpg' },
+  { title: 'In-House Design Team', desc: 'Our dedicated in-house designers work with you from concept to completion, ensuring a cohesive vision and full control over quality at every stage.', image: '/assets/stock-photos/2.jpg' },
+  { title: 'On-Time Delivery', desc: 'We value your time and guarantee timely project completion without compromising on quality, start to finish.', image: '/assets/stock-photos/3.jpg' },
+  { title: 'Expert Craftsmanship', desc: 'Our team comprises seasoned experts dedicated to maintaining the highest standards of craftsmanship, precision and quality.', image: '/assets/stock-photos/4.jpg' },
 ];
 ---
 
@@ -66,7 +66,12 @@ const whyChoose = [
         </svg>
       </a>
     </section>
-    <div id="heroImage" class="hero-image-float landing-bg hidden lg:block" aria-hidden="true"></div>
+    <div
+      id="heroImage"
+      class="hero-image-float hidden lg:block"
+      style="background-image: url('/assets/stock-photos/welcome-hero.jpg'); background-size: cover; background-position: center;"
+      aria-hidden="true"
+    ></div>
   </Fragment>
 
   <!-- HOME -->
@@ -93,9 +98,12 @@ const whyChoose = [
               functionality and premium craftsmanship in every space we build.
             </p>
           </div>
-          <div id="heroImageTarget" class="landing-bg aspect-[4/3] rounded-2xl flex items-center justify-center overflow-hidden">
-            <span class="font-display text-paper/30 text-sm uppercase tracking-widest">Image of Works</span>
-          </div>
+          <img
+            id="heroImageTarget"
+            src="/assets/stock-photos/welcome-hero.jpg"
+            alt="HUDUDI Interiors completed works"
+            class="aspect-[4/3] w-full rounded-2xl object-cover"
+          />
         </div>
 
         <div class="grid md:grid-cols-2 gap-6">
