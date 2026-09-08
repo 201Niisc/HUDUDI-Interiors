@@ -1,12 +1,3 @@
-const placeholderFields = {
-  location: 'Dubai, UAE',
-  authorities: ['To be confirmed'],
-  scopeOfWork: ['To be confirmed'],
-  status: 'Completed',
-  year: '2024',
-  images: [],
-};
-
 export const projects = [
   {
     slug: 'amber-grounds-cafe',
@@ -66,7 +57,4 @@ export const projects = [
       '/assets/projects/murjan-1/04.jpeg',
     ],
   },
-  { slug: 'exhibition-stand-01', name: 'Project Name', category: 'Exhibition Stand', ...placeholderFields },
-  { slug: 'restaurant-fit-out-01', name: 'Project Name', category: 'Restaurant Fit-Out', ...placeholderFields },
-  { slug: 'commercial-01', name: 'Project Name', category: 'Commercial', ...placeholderFields },
 ];

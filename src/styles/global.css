@@ -48,6 +48,17 @@ body {
     radial-gradient(ellipse 60% 55% at 50% 38%, rgba(242, 122, 53, 0.16), transparent 70%),
     linear-gradient(180deg, #141414 0%, #0a0a0a 55%, #000 100%);
 }
+@media (max-width: 767px) {
+  .landing-bg {
+    background:
+      radial-gradient(ellipse 60% 55% at 50% 38%, rgba(242, 122, 53, 0.18), transparent 70%),
+      linear-gradient(180deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.55) 55%, rgba(0, 0, 0, 0.75) 100%),
+      url('/assets/projects/rayhaan-perfumes/03.jpg');
+    background-size: cover, cover, cover;
+    background-position: center, center, center;
+    background-repeat: no-repeat;
+  }
+}
 .landing-content {
   opacity: 0;
   transform: translateY(24px);
