@@ -13,7 +13,7 @@ const heroTransitionName = `view-transition-name: project-image-${project.slug}`
 
 <Layout
   title={project.name}
-  description={`${project.name} — ${project.category} project by HUDUDI Interiors in ${project.location}.`}
+  description={`${project.name}, a ${project.category} project by HUDUDI Interiors in ${project.location}.`}
 >
   <section class="px-6 md:px-10 pt-16 md:pt-24">
     <div class="max-w-7xl mx-auto reveal">
@@ -36,23 +36,23 @@ const heroTransitionName = `view-transition-name: project-image-${project.slug}`
           <div class="space-y-5 text-sm">
             <div>
               <p class="text-ink/40 uppercase tracking-widest text-[10px] mb-1">Location</p>
-              <p>{project.location ?? '—'}</p>
+              <p>{project.location ?? 'N/A'}</p>
             </div>
             <div>
               <p class="text-ink/40 uppercase tracking-widest text-[10px] mb-1">Authorities</p>
-              <p>{(project.authorities ?? []).join(', ') || '—'}</p>
+              <p>{(project.authorities ?? []).join(', ') || 'N/A'}</p>
             </div>
             <div>
               <p class="text-ink/40 uppercase tracking-widest text-[10px] mb-1">Scope of Work</p>
-              <p>{(project.scopeOfWork ?? []).join(', ') || '—'}</p>
+              <p>{(project.scopeOfWork ?? []).join(', ') || 'N/A'}</p>
             </div>
             <div>
               <p class="text-ink/40 uppercase tracking-widest text-[10px] mb-1">Status</p>
-              <p>{project.status ?? '—'}</p>
+              <p>{project.status ?? 'N/A'}</p>
             </div>
             <div>
               <p class="text-ink/40 uppercase tracking-widest text-[10px] mb-1">Year</p>
-              <p>{project.year ?? '—'}</p>
+              <p>{project.year ?? 'N/A'}</p>
             </div>
           </div>
         </div>
@@ -79,7 +79,7 @@ const heroTransitionName = `view-transition-name: project-image-${project.slug}`
       {images.slice(1).map((src, i) => (
         <img
           src={src}
-          alt={`${project.name} — image ${i + 2}`}
+          alt={`${project.name}, image ${i + 2}`}
           class="h-[432px] sm:h-[540px] w-auto shrink-0 rounded-2xl first:ml-6 md:first:ml-10 last:mr-6 md:last:mr-10"
           loading="lazy"
           draggable="false"

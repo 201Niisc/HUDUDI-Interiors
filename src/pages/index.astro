@@ -37,6 +37,17 @@ const whyChoose = [
   { title: 'On-Time Delivery', desc: 'We value your time and guarantee timely project completion without compromising on quality, start to finish.', image: '/assets/stock-photos/3.jpg' },
   { title: 'Expert Craftsmanship', desc: 'Our team comprises seasoned experts dedicated to maintaining the highest standards of craftsmanship, precision and quality.', image: '/assets/stock-photos/4.jpg' },
 ];
+
+const testimonials = [
+  { quote: 'Very professional team following up all the step of the process. Team always available to clarify any details and doubts. Thank you!', name: 'Samanta Capra' },
+  { quote: 'Hududi interiors.. Such an amazing guys they deliver a spectacular output which is more than my expectations.', name: 'Dhibinraj T.' },
+  { quote: 'Amazing service, they helped with all necessary approvals on time.', name: 'Sankar Vasudev' },
+  { quote: 'Excellent service from Hududi Interiors. They managed all approvals quickly and delivered a high-quality fit-out on time. Highly professional and reliable team in the UAE.', name: 'Merin Alexander' },
+  { quote: "I've known the owners for many years and use their company as subcontractor. They are very fast with any kind of government approvals and their work ethics and execution is very professional. Highly recommend their services for any fit-out or interior designs work.", name: 'A.S., Business Owner' },
+  { quote: 'Hududi Interiors did an amazing job transforming my space. Their team was professional, efficient, and paid attention to every detail. The quality of work was excellent, and they completed everything on time. Highly recommend for anyone looking for top-notch interior design in Dubai.', name: 'Nidhin Anil' },
+  { quote: 'Great work, fast approvals. Dedicated staff, professional team. On time works completion, highly recommended.', name: 'Mithu Prem' },
+  { quote: 'HUDUDI INTERIORS LLC delivers innovative, high-quality designs, enhancing functionality and aesthetics. Clients benefit from their commitment to excellence.', name: 'Geethi C' },
+];
 ---
 
 <Layout>
@@ -81,21 +92,27 @@ const whyChoose = [
         <span class="text-orange">Welcome</span> to HUDUDI Interiors
       </h2>
 
-      <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center mb-20">
+      <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-start mb-20">
         <div>
             <p class="text-ink/70 text-base leading-relaxed mb-8">
-              HUDUDI Interiors is a Dubai-based interior design and fit-out firm
-              bringing over 25 years of combined expertise to residential,
-              commercial and retail spaces across the UAE.
+              We are a Design and Engineering studio with 15+ years of
+              experience, focused on fit-out approvals, design and
+              execution, delivering commercial and retail spaces across
+              Dubai. Our in-house team handles every stage under one roof,
+              from initial concept and authority approvals through to
+              fit-out and final handover, so you deal with a single point
+              of contact throughout.
             </p>
             <h3 class="font-display text-xl md:text-2xl font-medium mb-3">
-              Comprehensive Interior Design Solutions
+              Expert Fit-Out Authority Approvals
             </h3>
             <p class="text-ink/70 text-base leading-relaxed">
-              From securing authority approvals to designing and executing
-              intricate interior projects, we offer an all-in-one solution
-              tailored to your specific needs, combining innovation,
-              functionality and premium craftsmanship in every space we build.
+              We deliver every project with utmost dedication and clarity,
+              keeping you updated at every stage, with no drawbacks in
+              design, communication or execution. We stay closely engaged
+              with the relevant authorities to keep approvals on track, and
+              provide consistent progress updates so nothing catches you by
+              surprise.
             </p>
           </div>
           <img
@@ -110,17 +127,17 @@ const whyChoose = [
           <div class="rounded-2xl bg-ink text-paper p-8 md:p-10">
             <p class="text-orange uppercase tracking-wide text-2xl md:text-3xl font-display font-semibold mb-4">Our Mission</p>
             <p class="text-base leading-relaxed">
-              To provide comprehensive and reliable interior services with
-              unmatched quality, ensuring customer satisfaction and fostering
-              long-term relationships.
+              We are committed to delivering efficient and reliable interior
+              solutions with unwavering dedication, ensuring complete
+              customer satisfaction and building lasting relationships.
             </p>
           </div>
           <div class="rounded-2xl border-2 border-orange text-ink p-8 md:p-10">
             <p class="text-orange uppercase tracking-wide text-2xl md:text-3xl font-display font-semibold mb-4">Our Vision</p>
             <p class="text-base leading-relaxed">
-              To be a leading name in interior designing services, delivering
-              innovative solutions that redefine the standards of excellence in
-              property enhancement.
+              To be a leading name in Architectural and Interior Services,
+              delivering innovative solutions that redefine the standards of
+              excellence in property enhancement.
             </p>
           </div>
         </div>
@@ -225,7 +242,7 @@ const whyChoose = [
   </section>
 
   <!-- CONTACT -->
-  <section id="contact" class="px-6 md:px-10 pt-24 md:pt-32 pb-12 md:pb-16">
+  <section id="contact" class="px-6 md:px-10 py-24 md:py-32 border-b border-line">
     <div class="max-w-7xl mx-auto reveal">
       <h2 class="font-display font-semibold text-4xl md:text-6xl tracking-tight mb-12">
         Let's build<br />something.
@@ -260,7 +277,104 @@ const whyChoose = [
       </div>
     </div>
   </section>
+
+  <!-- TESTIMONIAL -->
+  <section id="testimonial" class="px-6 md:px-10 pt-24 md:pt-32 pb-12 md:pb-16">
+    <div class="max-w-7xl mx-auto reveal">
+      <h2 class="font-display font-semibold text-4xl md:text-6xl tracking-tight mb-16">What Our Clients Say</h2>
+      <div class="rounded-2xl bg-paper border-2 border-orange text-ink p-10 md:p-16 relative overflow-hidden">
+        <svg class="text-orange w-12 h-12 md:w-16 md:h-16 mb-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.571-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z" />
+        </svg>
+        <div id="testimonialSlides">
+          {testimonials.map((t, i) => (
+            <div class="testimonial-slide" data-index={i} style={i === 0 ? undefined : 'display:none;'}>
+              <p class="text-base md:text-lg leading-relaxed max-w-4xl">
+                {t.quote}
+              </p>
+              <p class="mt-8 text-orange uppercase tracking-widest text-xs md:text-sm">
+                {t.name}
+              </p>
+            </div>
+          ))}
+        </div>
+        <div class="flex items-center gap-2 mt-10">
+          {testimonials.map((_, i) => (
+            <button
+              class="testimonial-dot w-2 h-2 rounded-full bg-orange/25 transition-colors"
+              data-index={i}
+              aria-label={`Show testimonial ${i + 1}`}
+            ></button>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
 </Layout>
+
+<script>
+  const slides = Array.from(document.querySelectorAll<HTMLElement>('.testimonial-slide'));
+  const dots = Array.from(document.querySelectorAll<HTMLButtonElement>('.testimonial-dot'));
+
+  if (slides.length > 1) {
+    let active = 0;
+    let timer: ReturnType<typeof setInterval> | null = null;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const setDot = (i: number) => {
+      dots.forEach((d, di) => d.classList.toggle('bg-orange', di === i));
+      dots.forEach((d, di) => d.classList.toggle('bg-orange/25', di !== i));
+    };
+
+    const show = (next: number) => {
+      const current = slides[active];
+      const upcoming = slides[next];
+      current.style.opacity = '0';
+      setTimeout(() => {
+        current.style.display = 'none';
+        upcoming.style.display = '';
+        requestAnimationFrame(() => {
+          upcoming.style.opacity = '1';
+        });
+      }, 300);
+      active = next;
+      setDot(active);
+    };
+
+    slides.forEach((s) => {
+      s.style.transition = 'opacity 0.3s ease';
+      s.style.opacity = '1';
+    });
+    setDot(0);
+
+    const advance = () => show((active + 1) % slides.length);
+
+    const startTimer = () => {
+      if (prefersReducedMotion) return;
+      timer = setInterval(advance, 4000);
+    };
+    const stopTimer = () => {
+      if (timer) clearInterval(timer);
+      timer = null;
+    };
+
+    dots.forEach((d) => {
+      d.addEventListener('click', () => {
+        const i = Number(d.dataset.index);
+        if (i === active) return;
+        stopTimer();
+        show(i);
+        startTimer();
+      });
+    });
+
+    const section = document.getElementById('testimonial');
+    section?.addEventListener('mouseenter', stopTimer);
+    section?.addEventListener('mouseleave', startTimer);
+
+    startTimer();
+  }
+</script>
 
 <script>
   const form = document.getElementById('contact-form') as HTMLFormElement | null;
