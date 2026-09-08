@@ -94,7 +94,7 @@ const businessSchema = {
   <body>
     <Sidebar startHidden={hasCover} />
     <slot name="cover" />
-    <div class="flex min-h-screen flex-col md:pl-[240px]">
+    <div id="pageWrapper" class="page-wrapper flex min-h-screen flex-col md:pl-[240px]">
       <main class="flex-1">
         <slot />
       </main>

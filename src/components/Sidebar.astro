@@ -24,6 +24,18 @@ const navItems = [
   <span></span><span></span><span></span>
 </button>
 
+<div class="edge-indicator" id="edgeIndicator" class:list={{ 'nav-hidden': startHidden }}>
+  {navItems.map((item) => (
+    <span class="edge-dot" data-section={item.href.slice(1)}></span>
+  ))}
+</div>
+
+<button class="sidebar-toggle" id="sidebarToggle" aria-label="Collapse menu" class:list={{ 'nav-hidden': startHidden }}>
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M15 18l-6-6 6-6" />
+  </svg>
+</button>
+
 <aside class="sidebar" id="sidebar" class:list={{ 'nav-hidden': startHidden }}>
   <div>
     <a href="/" id="logoLink" class="block">
@@ -86,25 +98,173 @@ const navItems = [
       display: flex;
     }
   }
+
+  .edge-indicator {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 8px;
+    transform: translateY(-50%);
+    z-index: 150;
+    flex-direction: column;
+    gap: 14px;
+    padding: 10px 6px;
+    transition: opacity 0.3s ease;
+  }
+  .edge-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #cfcfcf;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .edge-dot.active {
+    background: #f27a35;
+    transform: scale(1.6);
+  }
+  .edge-indicator.nav-hidden,
+  .edge-indicator.sidebar-open {
+    opacity: 0;
+    pointer-events: none;
+  }
+  @media (max-width: 767px) {
+    .edge-indicator {
+      display: flex;
+    }
+  }
+
+  .sidebar-toggle {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 240px;
+    width: 24px;
+    height: 40px;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-left: none;
+    border-radius: 0 8px 8px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 160;
+    color: #0a0a0a;
+    padding: 0;
+    transition: left 0.3s ease, opacity 0.3s ease;
+  }
+  .sidebar-toggle svg {
+    transition: transform 0.3s ease;
+  }
+  .sidebar-toggle.nav-hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+  @media (max-width: 767px) {
+    .sidebar-toggle {
+      left: 0;
+    }
+    .sidebar-toggle svg {
+      transform: rotate(180deg);
+    }
+    .sidebar-toggle.open {
+      left: 240px;
+    }
+    .sidebar-toggle.open svg {
+      transform: rotate(0deg);
+    }
+  }
+  @media (min-width: 768px) {
+    .sidebar-toggle.closed {
+      left: 0;
+    }
+    .sidebar-toggle.closed svg {
+      transform: rotate(180deg);
+    }
+  }
 </style>
 
 <script>
   const hamburger = document.getElementById('hamburger');
   const sidebar = document.getElementById('sidebar');
   const backdrop = document.getElementById('sidebarBackdrop');
+  const edgeIndicator = document.getElementById('edgeIndicator');
+  const toggleBtn = document.getElementById('sidebarToggle');
+  const pageWrapper = document.getElementById('pageWrapper');
   const links = document.querySelectorAll<HTMLAnchorElement>('.nav-link');
+  const edgeDots = document.querySelectorAll<HTMLSpanElement>('.edge-dot');
 
-  function closeSidebar() {
-    sidebar?.classList.remove('open');
-    backdrop?.classList.remove('open');
+  const mobileQuery = window.matchMedia('(max-width: 767px)');
+  const isMobile = () => mobileQuery.matches;
+  const isSidebarVisible = () =>
+    isMobile() ? !!sidebar?.classList.contains('open') : !sidebar?.classList.contains('closed');
+
+  function showSidebar() {
+    if (isMobile()) {
+      sidebar?.classList.add('open');
+      backdrop?.classList.add('open');
+      toggleBtn?.classList.add('open');
+    } else {
+      sidebar?.classList.remove('closed');
+      toggleBtn?.classList.remove('closed');
+      pageWrapper?.classList.remove('sidebar-collapsed');
+    }
+    edgeIndicator?.classList.add('sidebar-open');
+  }
+
+  function hideSidebar() {
+    if (isMobile()) {
+      sidebar?.classList.remove('open');
+      backdrop?.classList.remove('open');
+      toggleBtn?.classList.remove('open');
+    } else {
+      sidebar?.classList.add('closed');
+      toggleBtn?.classList.add('closed');
+      pageWrapper?.classList.add('sidebar-collapsed');
+    }
+    edgeIndicator?.classList.remove('sidebar-open');
   }
 
   hamburger?.addEventListener('click', () => {
-    sidebar?.classList.toggle('open');
-    backdrop?.classList.toggle('open');
+    isSidebarVisible() ? hideSidebar() : showSidebar();
   });
-  backdrop?.addEventListener('click', closeSidebar);
-  links.forEach((a) => a.addEventListener('click', closeSidebar));
+  toggleBtn?.addEventListener('click', () => {
+    isSidebarVisible() ? hideSidebar() : showSidebar();
+  });
+  backdrop?.addEventListener('click', hideSidebar);
+  links.forEach((a) => a.addEventListener('click', hideSidebar));
+  edgeDots.forEach((d) => d.addEventListener('click', showSidebar));
+
+  // Swipe-to-close on mobile
+  let touchStartX = 0;
+  let touching = false;
+  sidebar?.addEventListener(
+    'touchstart',
+    (e: TouchEvent) => {
+      if (!sidebar.classList.contains('open')) return;
+      touching = true;
+      touchStartX = e.touches[0].clientX;
+      sidebar.style.transition = 'none';
+    },
+    { passive: true }
+  );
+  sidebar?.addEventListener(
+    'touchmove',
+    (e: TouchEvent) => {
+      if (!touching) return;
+      const deltaX = Math.min(0, e.touches[0].clientX - touchStartX);
+      sidebar.style.transform = `translateX(${deltaX}px)`;
+    },
+    { passive: true }
+  );
+  sidebar?.addEventListener('touchend', (e: TouchEvent) => {
+    if (!touching) return;
+    touching = false;
+    sidebar.style.transition = '';
+    sidebar.style.transform = '';
+    const deltaX = e.changedTouches[0].clientX - touchStartX;
+    if (deltaX < -60) hideSidebar();
+  });
 
   const sections = Array.from(document.querySelectorAll<HTMLElement>('section[id]'));
   const observer = new IntersectionObserver(
@@ -114,6 +274,9 @@ const navItems = [
           const id = entry.target.id;
           links.forEach((a) => {
             a.classList.toggle('active', a.dataset.section === id);
+          });
+          edgeDots.forEach((d) => {
+            d.classList.toggle('active', d.dataset.section === id);
           });
         }
       });
@@ -129,6 +292,8 @@ const navItems = [
         entries.forEach((entry) => {
           sidebar?.classList.toggle('nav-hidden', entry.isIntersecting);
           hamburger?.classList.toggle('nav-hidden', entry.isIntersecting);
+          edgeIndicator?.classList.toggle('nav-hidden', entry.isIntersecting);
+          toggleBtn?.classList.toggle('nav-hidden', entry.isIntersecting);
         });
       },
       { threshold: 0.5 }
