@@ -52,7 +52,7 @@ const testimonials = [
 
 <Layout>
   <Fragment slot="cover">
-    <section id="landing" class="landing relative h-screen w-full flex items-center justify-center overflow-hidden">
+    <section id="landing" class="landing relative h-dvh w-full flex items-center justify-center overflow-hidden">
       <div class="landing-bg absolute inset-0"></div>
       <div class="landing-content relative z-10 flex flex-col items-center text-center px-6">
         <img src="/assets/logo/hududi-icon.png" alt="" class="w-24 md:w-32 h-auto mb-8" />
@@ -405,8 +405,8 @@ const testimonials = [
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: { Accept: 'application/json' },
-        body: new FormData(form),
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(Object.fromEntries(new FormData(form))),
       });
       const result = await response.json();
 
