@@ -1,16 +1,17 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { projects } from '../data/projects.js';
+import { approvals } from '../data/approvals.js';
 
 const services = [
-  { n: '01', name: 'Fit-Out & Interior Approvals' },
-  { n: '02', name: 'Interior Designing & Decoration' },
-  { n: '03', name: 'Fit-Out Works' },
-  { n: '04', name: 'Exhibition Stands' },
-  { n: '05', name: 'MEP Works' },
-  { n: '06', name: 'Masonry Work' },
-  { n: '07', name: 'Steel Work' },
-  { n: '08', name: 'Glass & Aluminum Works' },
+  { name: 'Fit-Out & Interior Approvals' },
+  { name: 'Interior Designing & Decoration' },
+  { name: 'Fit-Out Works' },
+  { name: 'Exhibition Stands' },
+  { name: 'MEP Works' },
+  { name: 'Masonry Work' },
+  { name: 'Steel Work' },
+  { name: 'Glass & Aluminum Works' },
 ];
 
 const authorities = [
@@ -33,6 +34,25 @@ const whyChoose = [
   { title: 'On-Time Delivery', desc: 'We value your time and guarantee timely project completion without compromising on quality, start to finish.', image: '/assets/stock-photos/3.jpg' },
   { title: 'Expert Craftsmanship', desc: 'Our team comprises seasoned experts dedicated to maintaining the highest standards of craftsmanship, precision and quality.', image: '/assets/stock-photos/4.jpg' },
 ];
+
+const process = [
+  { n: '01', title: 'Consultation', desc: 'We visit the site, understand your requirements, budget and timeline, and advise which authority approvals your project needs.' },
+  { n: '02', title: 'Design & Drawings', desc: 'Our in-house team prepares the interior design along with the architectural and engineering drawings required for submission.' },
+  { n: '03', title: 'Authority Approvals', desc: 'We submit to the relevant authorities, respond to their comments and follow up until the permits are issued.' },
+  { n: '04', title: 'Fit-Out Works', desc: 'Our team carries out the works on site, from MEP to finishes, with regular progress updates.' },
+  { n: '05', title: 'Inspection & Handover', desc: 'We coordinate the final inspections and completion certificates, then hand over a space ready to open.' },
+];
+
+// Recent Approvals timeline: newest first (year, then month; entries without a month go last in
+// their year). Each row carries its "Mon YYYY" label; the label is shown only on the first row of a
+// month. Rows past APPROVALS_VISIBLE start hidden behind "View more".
+const APPROVALS_VISIBLE = 8;
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const monthIndex = (a) => (a.month ? MONTHS.indexOf(a.month) : -1);
+const approvalTimeline = [...approvals]
+  .sort((a, b) => Number(b.year) - Number(a.year) || monthIndex(b) - monthIndex(a))
+  .map((a) => ({ ...a, label: a.month ? `${a.month} ${a.year}` : a.year }))
+  .map((a, i, all) => ({ ...a, firstOfMonth: i === 0 || all[i - 1].label !== a.label }));
 
 const testimonials = [
   { quote: 'Very professional team following up all the step of the process. Team always available to clarify any details and doubts. Thank you!', name: 'Samanta Capra' },
@@ -138,11 +158,9 @@ const testimonials = [
           </div>
         </div>
       </div>
-  </section>
 
-  <!-- ABOUT -->
-  <section id="about" class="px-6 md:px-10 py-24 md:py-32 border-b border-line">
-    <div class="max-w-7xl mx-auto reveal">
+    <!-- ABOUT -->
+    <div id="about" class="max-w-7xl mx-auto reveal mt-24 md:mt-32">
       <h3 class="font-display text-2xl md:text-3xl font-semibold mb-10">
         Why Choose <span class="text-orange">HUDUDI Interiors</span> for Your Next Project?
       </h3>
@@ -165,21 +183,39 @@ const testimonials = [
   <section id="services" class="px-6 md:px-10 py-24 md:py-32 border-b border-line">
     <div class="max-w-7xl mx-auto reveal">
       <h2 class="font-display font-semibold text-4xl md:text-6xl tracking-tight mb-16">Services</h2>
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 auto-rows-fr gap-4">
         {services.map((s) => (
-          <div class="group rounded-2xl border border-line p-5 md:p-6 flex flex-col gap-4 hover:bg-ink hover:border-ink transition-colors">
-            <span class="text-orange text-sm font-display">{s.n}</span>
+          <div class="group h-full rounded-2xl border border-orange p-5 md:p-6 flex flex-col gap-4 hover:bg-ink hover:border-ink transition-colors">
             <h3 class="font-display text-base md:text-lg font-medium leading-snug group-hover:text-paper transition-colors">{s.name}</h3>
           </div>
         ))}
       </div>
+    </div>
+    <!-- HOW WE WORK -->
+    <div id="process" class="max-w-7xl mx-auto reveal mt-24 md:mt-32">
+      <h3 class="font-display text-2xl md:text-3xl font-semibold mb-10">How We Work</h3>
+      <ol class="grid sm:grid-cols-2 lg:grid-cols-5 gap-x-6 lg:gap-x-8 gap-y-12">
+        {process.map((s, i) => (
+          <li class="border-t-2 border-orange pt-6">
+            <h3 class="relative font-display text-lg md:text-xl font-medium mb-3">
+              {s.title}
+              {i < process.length - 1 && (
+                <svg class="hidden lg:block absolute top-[0.875rem] -translate-y-1/2 -right-[23px] text-ink/45" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              )}
+            </h3>
+            <p class="text-base text-ink/60 leading-relaxed">{s.desc}</p>
+          </li>
+        ))}
+      </ol>
     </div>
   </section>
 
   <!-- AUTHORITIES -->
   <section id="authorities" class="px-6 md:px-10 py-24 md:py-32 border-b border-line bg-paper text-ink">
     <div class="max-w-7xl mx-auto reveal">
-      <h2 class="font-display font-semibold text-4xl md:text-6xl tracking-tight mb-16">Authorities</h2>
+      <h2 class="font-display font-semibold text-4xl md:text-6xl tracking-tight mb-16">Authorities &amp; Approvals</h2>
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
         {authorities.map((a) => (
           <div class="rounded-2xl border border-line aspect-[4/3] p-5 md:p-6 flex items-center justify-center">
@@ -193,11 +229,88 @@ const testimonials = [
           </div>
         ))}
       </div>
-      <p class="text-base text-ink/40 mt-6">
-        Approvals coordinated with the authorities and developers above; logos shown for identification purposes only.
-      </p>
+    </div>
+    <!-- RECENT APPROVALS -->
+    <div id="approvals" class="max-w-7xl mx-auto reveal mt-24 md:mt-32">
+      <h3 class="font-display text-2xl md:text-3xl font-semibold mb-10">Recent Approvals</h3>
+      <div data-approvals-list>
+        <ol>
+          {approvalTimeline.map((a, i) => (
+            <li class:list={[{ 'approval-extra hidden': i >= APPROVALS_VISIBLE }]}>
+              <div class="md:grid md:grid-cols-[7.5rem_1fr] md:gap-x-8">
+              <p class="hidden md:block text-right text-xs uppercase tracking-widest text-ink/40 pt-[1.6rem]">
+                {a.firstOfMonth && a.label}
+              </p>
+              <div class="relative border-l border-line pl-7 md:pl-8 py-5">
+                <span
+                  class:list={[
+                    'absolute -left-[5px] top-[1.85rem] h-[9px] w-[9px] rounded-full',
+                    a.status === 'approved' ? 'bg-orange' : 'bg-paper border-[1.5px] border-ink/35',
+                  ]}
+                  aria-hidden="true"
+                ></span>
+                <div class="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-8">
+                  <div class="lg:flex-1 min-w-0">
+                    <p class="md:hidden text-[10px] uppercase tracking-widest text-ink/40 mb-1">{a.label}</p>
+                    <p class="font-display text-lg font-medium leading-snug">{a.project ?? a.type}</p>
+                    {(a.project || a.location) && (
+                      <p class="text-xs uppercase tracking-widest text-ink/50 mt-1">
+                        {[a.project ? a.type : null, a.location].filter(Boolean).join(' · ')}
+                      </p>
+                    )}
+                  </div>
+                  <div class="flex flex-wrap gap-2 lg:w-[34%] lg:justify-end">
+                    {a.authorities.map((name) => (
+                      <span class="rounded-full bg-ink/[0.05] px-3 py-1 text-xs text-ink/70">{name}</span>
+                    ))}
+                  </div>
+                  <p class:list={[
+                    'text-xs uppercase tracking-widest font-medium lg:w-28 lg:text-right shrink-0',
+                    a.status === 'approved' ? 'text-orange' : 'text-ink/45',
+                  ]}>
+                    {a.status === 'approved' ? 'Approved' : 'In Progress'}
+                  </p>
+                </div>
+                {a.duration && (
+                  <p class="text-sm text-ink/60 mt-3">Approved in <span class="text-ink font-medium">{a.duration}</span></p>
+                )}
+              </div>
+              </div>
+            </li>
+          ))}
+        </ol>
+        {approvalTimeline.length > APPROVALS_VISIBLE && (
+          <button
+            type="button"
+            class="approval-toggle mt-10 mx-auto flex items-center gap-2 rounded-full border border-line px-6 py-3 text-sm font-medium hover:border-orange hover:text-orange transition-colors"
+            aria-expanded="false"
+            data-more="View more"
+            data-less="Show less"
+          >
+            <span class="approval-toggle-label">View more</span>
+            <svg class="approval-toggle-icon transition-transform" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </button>
+        )}
+      </div>
     </div>
   </section>
+
+  <script>
+    document.querySelectorAll<HTMLElement>('[data-approvals-list]').forEach((group) => {
+      const toggle = group.querySelector<HTMLButtonElement>('.approval-toggle');
+      if (!toggle) return;
+      toggle.addEventListener('click', () => {
+        const expanded = toggle.getAttribute('aria-expanded') === 'true';
+        group.querySelectorAll('.approval-extra').forEach((el) => el.classList.toggle('hidden', expanded));
+        toggle.setAttribute('aria-expanded', String(!expanded));
+        toggle.querySelector('.approval-toggle-label')!.textContent = expanded ? toggle.dataset.more! : toggle.dataset.less!;
+        toggle.querySelector('.approval-toggle-icon')!.classList.toggle('rotate-180', !expanded);
+        if (expanded) group.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  </script>
 
   <!-- PORTFOLIO -->
   <section id="portfolio" class="px-6 md:px-10 py-24 md:py-32 border-b border-line">
@@ -233,7 +346,6 @@ const testimonials = [
           );
         })}
       </div>
-      <p class="text-base text-ink/40 mt-6">* Project images to be added.</p>
     </div>
   </section>
 
