@@ -4,6 +4,11 @@
 // `project` is the shop/business name; private individuals' names are left out.
 export const approvals = [
   // 2026
+  { year: '2026', month: 'Oct', status: 'approved', project: 'The House of Cakes Bakery', type: 'Bakery', location: 'International City', authorities: ['DM Food Control'] },
+  { year: '2026', month: 'Oct', status: 'in-progress', project: 'Mohamed Ali Moideen Drug Store', type: 'Drug Store Modification', location: 'International City', authorities: ['Civil Defense', 'Trakhees'] },
+  { year: '2026', month: 'Oct', status: 'approved', project: 'King Afghan Kabab Pallow Restaurant', type: 'Restaurant', location: 'Al Muteena', authorities: ['DM Food Control'] },
+  { year: '2026', month: 'Oct', status: 'in-progress', project: 'Henna Hameed Sweets & Candies', type: 'Sweets & Candies', location: 'International City', authorities: ['DM Food Control', 'Civil Defense', 'Trakhees'] },
+  { year: '2026', month: 'Oct', status: 'in-progress', project: 'Curl and Cove Ladies Salon', type: 'Ladies Salon', location: 'Dubai Marina', authorities: ['DM Health & Safety NOC', 'Civil Defense', 'DDA'] },
   { year: '2026', month: 'Oct', status: 'in-progress', project: 'Heera Bannu Pulao Restaurant', type: 'Restaurant', location: 'International City', authorities: ['DM Food Control'] },
   { year: '2026', month: 'Oct', status: 'in-progress', project: 'Daneen Beauty Salon', type: 'Beauty Salon', location: 'Mirdif', authorities: ['DM Health & Safety NOC'] },
   { year: '2026', month: 'Sep', status: 'in-progress', project: 'The Wellbite Restaurant', type: 'Restaurant', location: 'International City', authorities: ['Dubai Holding', 'Civil Defense', 'Trakhees'] },
@@ -17,7 +22,7 @@ export const approvals = [
   { year: '2026', month: 'Aug', status: 'approved', project: 'Kattappa Chai Restaurant & Catering', type: 'Restaurant & Catering', authorities: ['DM Food Control', 'Dubai Municipality', 'Civil Defense'] },
   { year: '2026', month: 'Aug', status: 'approved', project: 'Desi Chaskka Restaurant', type: 'Restaurant', location: 'International City', authorities: ['DM Food Control'] },
   { year: '2026', month: 'Aug', status: 'in-progress', project: 'Zener Marine Services (DMC Branch)', type: 'Marine Services Office', location: 'Dubai Maritime City', authorities: ['DMC', 'Civil Defense', 'Trakhees'] },
-  { year: '2026', month: 'Aug', status: 'approved', project: 'Mr. Mart', type: 'Retail Kiosk', authorities: ['Trakhees Temporary Kiosk Permit'] },
+  { year: '2026', month: 'Aug', status: 'approved', project: 'Mr. Mart', type: 'Retail Kiosk', authorities: ['Trakhees Temporary Kiosk Permit', 'DM Food Control'] },
   { year: '2026', month: 'Aug', status: 'in-progress', project: 'Zener Marine Services', type: 'Office Fit-Out', authorities: ['Dubai Holding', 'Civil Defense', 'Trakhees'] },
   { year: '2026', month: 'Aug', status: 'approved', project: 'Mommy & Me Readymade Garments', type: 'Shop Front Replacement', location: 'International City', authorities: ['Dubai Holding'] },
   { year: '2026', month: 'Jul', status: 'approved', project: 'Schematic Engineering Consultants', type: 'Engineering Consultancy Office', location: 'Dubai Silicon Oasis', authorities: ['Civil Defense', 'DSO'] },
